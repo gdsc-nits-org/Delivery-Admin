@@ -10,4 +10,12 @@
     <string name="delivery_status">Delivery Status:</string>
     <string name="driver_incoming">Driver Incoming</string>
     <string name="todo">TODO</string>
+    <string name="delivering">Delivering</string>
+    <string name="open">Open</string>
+    <string name="masimpur_silchar">Masimpur,Silchar</string>
+    <string name="burger_king">Burger King</string>
+    <string name="home">Home</string>
+    <string name="explore">Explore</string>
+    <string name="menu">Menu</string>
+    <string name="profile">Profile</string>
 </resources>
