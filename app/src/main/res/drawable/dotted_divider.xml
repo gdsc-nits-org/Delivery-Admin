@@ -1,0 +1,9 @@
+<!-- res/drawable/dotted_divider.xml -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="line">
+    <stroke
+        android:color="#000000"
+        android:width="2dp"
+        android:dashWidth="4dp"
+        android:dashGap="4dp" />
+</shape>

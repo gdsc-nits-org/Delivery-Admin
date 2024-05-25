@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Delivery Admin</string>
+    <string name="menu">Menu</string>
+    <string name="Options">Options</string>
 </resources>
