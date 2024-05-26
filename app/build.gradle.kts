@@ -51,4 +51,5 @@ dependencies {
     implementation ("androidx.cardview:cardview:1.0.0")
     // recyclerview
     implementation ("androidx.recyclerview:recyclerview:1.3.2")
+
 }
