@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:context=".HomePageFragment">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="8dp"
+            android:orientation="vertical"
+            android:layout_margin="4dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/current_orders"
+                android:elevation="30dp"
+                android:shadowDx="@android:integer/config_longAnimTime"
+                android:textSize="20sp"
+                android:layout_margin="4dp"
+                android:textStyle="bold"/>
+            <ImageView
+                android:id="@+id/imgBackground"
+                android:layout_width="match_parent"
+                android:layout_height="250dp"
+                android:src="@drawable/emptypot"
+                android:background="@color/white"
+                android:visibility="visible"
+                android:contentDescription="@string/todo" />
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvOrders"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                tools:itemCount="2"
+                android:clickable="true"
+                android:focusable="true"
+                android:visibility="gone"
+                android:background="@color/background"
+                tools:listitem="@layout/item_orders_list"
+                android:layout_marginTop="8dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Orders Today"
+                android:textStyle="bold"
+                android:layout_marginVertical="16dp"
+                android:layout_marginHorizontal="4dp"
+                android:textSize="20sp"
+                android:elevation="30dp"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <androidx.cardview.widget.CardView
+                    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_margin="8dp"
+                    card_view:cardCornerRadius="8dp"
+                    card_view:cardElevation="16dp">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <ImageView
+                            android:id="@+id/ivPending"
+                            android:layout_width="match_parent"
+                            android:layout_height="225dp"
+                            android:scaleType="fitXY"
+                            app:srcCompat="@drawable/pending" />
+
+                        <TextView
+                            android:id="@+id/tvTitlePending"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentStart="true"
+                            android:layout_alignParentTop="true"
+                            android:layout_marginTop="15dp"
+                            android:layout_marginStart="24dp"
+                            android:text="Pending"
+                            android:background="@color/yellow"
+                            android:textColor="#DA5300"
+                            android:textSize="22sp"
+                            android:textStyle="normal" />
+
+                        <TextView
+                            android:id="@+id/tvDescPending"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentStart="true"
+                            android:layout_below="@id/tvTitlePending"
+                            android:background="@color/yellow"
+                            android:layout_marginStart="24dp"
+                            android:text="0"
+                            android:textStyle="bold"
+                            android:textColor="@color/textOrange"
+                            android:textSize="24sp" />
+
+                    </RelativeLayout>
+                </androidx.cardview.widget.CardView>
+                <androidx.cardview.widget.CardView
+                    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_margin="8dp"
+                    card_view:cardCornerRadius="8dp"
+                    card_view:cardElevation="8dp">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <ImageView
+                            android:id="@+id/ivDelivered"
+                            android:layout_width="match_parent"
+                            android:layout_height="225dp"
+                            android:scaleType="fitXY"
+                            app:srcCompat="@drawable/delivery" />
+
+                        <TextView
+                            android:id="@+id/tvTitleDelivered"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentStart="true"
+                            android:layout_alignParentTop="true"
+                            android:layout_marginTop="15dp"
+                            android:layout_marginStart="22dp"
+                            android:text="Completed"
+                            android:background="#229AD2"
+                            android:textColor="@color/white"
+                            android:textSize="22sp"
+                            android:textStyle="normal" />
+
+                        <TextView
+                            android:id="@+id/tvDescDelivered"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentStart="true"
+                            android:layout_below="@id/tvTitleDelivered"
+                            android:background="@color/Blue"
+                            android:layout_marginStart="20dp"
+                            android:paddingEnd="20dp"
+                            android:text="4"
+                            android:textStyle="bold"
+                            android:textColor="@color/white"
+                            android:textSize="24sp" />
+
+                    </RelativeLayout>
+                </androidx.cardview.widget.CardView>
+
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </ScrollView>
+</FrameLayout>
