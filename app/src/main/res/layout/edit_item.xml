@@ -1,19 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:padding="8dp"
     android:elevation="4dp"
     android:orientation="vertical">
-
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="8dp"
         android:elevation="4dp"
         android:background="?android:attr/windowBackground">
-
         <ImageView
             android:id="@+id/backArrow"
             android:layout_width="24dp"
@@ -32,45 +30,49 @@
             android:layout_centerInParent="true"
             android:textSize="16sp"
             android:letterSpacing="0"/>
+
+
     </RelativeLayout>
 
+
     <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="200dp"
+        android:layout_width="337dp"
+        android:layout_height="188dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
         android:layout_gravity="center_horizontal"
+        app:layout_constraintTop_toTopOf="parent"
         android:padding="8dp">
 
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             app:cardCornerRadius="16dp"
-            app:cardElevation="4dp"
-            android:foreground="?android:attr/selectableItemBackground">
+            >
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical"
-                android:gravity="center"
-                android:background="@drawable/dotted_border"
-                android:padding="16dp">
+            <ImageView
+                android:id="@+id/dishItemImage"
+                android:layout_width="337dp"
+                android:layout_height="188dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/dummy_food" />
 
-                <ImageView
-                    android:id="@+id/addImageIcon"
-                    android:layout_width="48dp"
-                    android:layout_height="48dp"
-                    android:src="@drawable/ic_add_image"
-                    app:tint="@color/orange" />
+        </androidx.cardview.widget.CardView>
 
-                <TextView
-                    android:id="@+id/addImageText"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/add_item_image"
-                    android:textColor="@color/black"
-                    android:textSize="14sp"
-                    android:layout_marginTop="8dp"/>
-            </LinearLayout>
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            app:cardCornerRadius="16dp"
+            >
+
+            <ImageView
+                android:layout_width="54dp"
+                android:layout_height="54dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/edit_button" />
         </androidx.cardview.widget.CardView>
     </RelativeLayout>
 
@@ -92,10 +94,11 @@
             app:boxCornerRadiusBottomEnd="8dp">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/itemNameInput"
+                android:id="@+id/dishNameEditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="text"/>
+                android:inputType="text" />
+
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
@@ -111,10 +114,11 @@
             app:boxCornerRadiusBottomEnd="8dp">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/itemPriceInput"
+                android:id="@+id/priceEditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="number"/>
+                android:inputType="text" />
+
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
@@ -130,19 +134,30 @@
             app:boxCornerRadiusBottomEnd="8dp">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/itemDescriptionInput"
+                android:id="@+id/ingredientsEditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="text"/>
+                android:inputType="text" />
+
         </com.google.android.material.textfield.TextInputLayout>
 
         <Button
-            android:id="@+id/saveButton"
+            android:id="@+id/saveChanges"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="16dp"
-            android:text="Save Changes"/>
+            android:text="Save Changes"
+            />
+
+        <Button
+            android:id="@+id/deleteButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="16dp"
+            android:text="Delete Item"
+            />
+
     </LinearLayout>
+
+
 </LinearLayout>
-
-

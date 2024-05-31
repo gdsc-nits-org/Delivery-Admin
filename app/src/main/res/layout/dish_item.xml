@@ -8,7 +8,6 @@
     android:elevation="4dp"
     android:orientation="vertical">
 
-
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -93,13 +92,12 @@
                 android:src="@drawable/dummy_food" />
 
             <androidx.cardview.widget.CardView
+                android:id="@+id/editButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentBottom="true"
-                app:cardCornerRadius="16dp"
-
-                >
+                app:cardCornerRadius="16dp">
 
                 <ImageView
                     android:layout_width="36.22dp"
@@ -116,6 +114,5 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
-
-
 </androidx.constraintlayout.widget.ConstraintLayout>
+

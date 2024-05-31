@@ -1,0 +1,49 @@
+{
+  "project_info": {
+    "project_number": "33525655100",
+    "firebase_url": "https://delivery-app-9324d-default-rtdb.firebaseio.com",
+    "project_id": "delivery-app-9324d",
+    "storage_bucket": "delivery-app-9324d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:33525655100:android:47d02ab6a349006a14c539",
+        "android_client_info": {
+          "package_name": "com.example.deliveryadmin"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAGJGLmLTigOy3RHWXwKmX73EBheIxddbw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:33525655100:android:b7bc3faefe851ff414c539",
+        "android_client_info": {
+          "package_name": "com.example.deliveryapp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAGJGLmLTigOy3RHWXwKmX73EBheIxddbw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
