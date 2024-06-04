@@ -10,4 +10,19 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="add_item_image">Add item\'s image</string>
 
+
+    <string name="current_orders">Current Orders</string>
+    <string name="_30_mins">30 Mins</string>
+    <string name="order_id">Order ID</string>
+    <string name="me20002977">ME20002977</string>
+    <string name="all_Details"><u><b>All Details</b></u></string>
+    <string name="delivery_status">Delivery Status:</string>
+    <string name="driver_incoming">Driver Incoming</string>
+    <string name="todo">TODO</string>
+    <string name="delivering">Delivering</string>
+    <string name="open">Open</string>
+    <string name="masimpur_silchar">Masimpur,Silchar</string>
+    <string name="burger_king">Burger King</string>
+    <string name="explore">Explore</string>
+
 </resources>
