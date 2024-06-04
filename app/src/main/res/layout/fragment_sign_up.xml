@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".SignUp">
+    tools:context=".FragmentSignUp">
 
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/backBtnSignUpPage"
@@ -43,6 +43,7 @@
             app:cardCornerRadius="2dp">
 
             <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/etNameSignUpPagelayout"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:background="@drawable/border"
@@ -102,6 +103,7 @@
             app:cardCornerRadius="2dp">
 
             <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/etPassSignUpPagelayout"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:background="@drawable/border"
@@ -191,7 +193,6 @@
         </LinearLayout>
 
     </LinearLayout>
-
 
 
 </LinearLayout>

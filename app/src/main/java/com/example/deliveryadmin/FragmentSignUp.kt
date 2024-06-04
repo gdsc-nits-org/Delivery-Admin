@@ -1,0 +1,120 @@
+package com.example.deliveryadmin
+
+import android.content.Intent
+import android.os.Bundle
+import android.util.Patterns
+import androidx.fragment.app.Fragment
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import android.widget.Toast
+import androidx.navigation.NavController
+import androidx.navigation.Navigation
+import androidx.navigation.fragment.findNavController
+import com.example.deliveryadmin.databinding.FragmentSignUpBinding
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.FirebaseDatabase
+
+
+class FragmentSignUp : Fragment() {
+
+    private lateinit var binding: FragmentSignUpBinding
+    private lateinit var navController: NavController
+    private lateinit var auth: FirebaseAuth
+    private lateinit var database: FirebaseDatabase
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        navController = Navigation.findNavController(view)
+    }
+
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        // Inflate the layout for this fragment
+        binding = FragmentSignUpBinding.inflate(inflater, container, false)
+
+        binding.btnSignUp.setOnClickListener {
+            if (checkAllFields()) {
+                auth = FirebaseAuth.getInstance()
+                database = FirebaseDatabase.getInstance()
+
+                val email = binding.etEmailSignUpPage.text.toString().trim()
+                val password = binding.etPassSignUpPage.text.toString().trim()
+
+                signUp(email, password)
+            }
+        }
+
+        binding.tvLoginPage.setOnClickListener {
+            navController.navigate(R.id.action_fragmentSignUp_to_fragmentLogIn)
+        }
+
+        return binding.root
+    }
+
+    private fun signUp(email: String, password: String) {
+        auth.createUserWithEmailAndPassword(email, password).addOnCompleteListener { task ->
+            if (task.isSuccessful) {
+                if (validateField()) {
+                    val name = binding.etNameSignUpPage.text.toString()
+                    val uid = auth.currentUser?.uid.toString()
+                    val user = hashMapOf(
+                        "name" to name,
+                    )
+
+                    val databaseRef = database.getReference("users")
+
+                    databaseRef.child(uid).setValue(user)
+
+                    val intent = Intent(context, HomeActivity::class.java)
+                    startActivity(intent)
+                }
+            }
+        }.addOnFailureListener { exception ->
+            Toast.makeText(context, exception.localizedMessage, Toast.LENGTH_LONG).show()
+        }
+    }
+
+    private fun validateField(): Boolean {
+        if (binding.etEmailSignUpPage.toString() == "") {
+            binding.etNameSignUpPagelayout.error = "This is required field"
+            return false
+        } else if (binding.etPassSignUpPage.toString() == "") {
+            binding.etPassSignUpPagelayout.error = "This is required field"
+            return false
+        }
+        return true
+    }
+
+    private fun checkAllFields(): Boolean {
+        val email = binding.etEmailSignUpPage.text.toString()
+        if (email == "") {
+            binding.etEmailSignUpPage.error = "This is required field"
+            return false
+        }
+
+        if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+            binding.etEmailSignUpPage.error = "Please enter a valid Email"
+            return false
+        }
+
+        if (binding.etPassSignUpPage.text.toString() == "") {
+            binding.etPassSignUpPage.error = "This is required field"
+            return false
+        }
+
+        if (binding.etRePassSignUpPage.text.toString() == "") {
+            binding.etRePassSignUpPage.error = "This is required field"
+            return false
+        }
+
+        if (binding.etPassSignUpPage.text.toString() != binding.etRePassSignUpPage.text.toString()) {
+            binding.etPassSignUpPage.error = "Password do not match"
+            return false
+        }
+        return true
+    }
+
+}
