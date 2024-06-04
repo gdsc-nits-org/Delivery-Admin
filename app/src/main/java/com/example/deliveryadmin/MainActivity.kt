@@ -9,9 +9,9 @@ import com.example.deliveryadmin.HomePageFragments.MenuFragment
 import com.example.deliveryadmin.HomePageFragments.ProfileFragment
 import com.example.deliveryadmin.HomePageFragments.SearchFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.google.firebase.FirebaseApp.initializeApp
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
+
 
 class MainActivity : AppCompatActivity() {
 
