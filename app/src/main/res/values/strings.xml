@@ -1,3 +1,8 @@
 <resources>
-    <string name="app_name">Delivery Admin</string>
+    <string name="app_name">Delivery App</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="welcome_to_">
+Welcome to\nOur App
+</string>
 </resources>

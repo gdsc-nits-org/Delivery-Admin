@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFFFFF"
+    android:orientation="vertical"
+    android:gravity="center_horizontal"
+    tools:context=".Fragments.AccessLocation">
+
+    <!-- TODO: Update blank fragment layout -->
+    <ImageView
+        android:layout_width="327dp"
+        android:layout_height="290dp"
+        android:layout_marginTop="178dp"
+        android:src="@drawable/location_access"/>
+
+    <Button
+        android:textColor="#FFFFFF"
+        android:id="@+id/btnAccessLocation"
+        android:layout_width="319dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="94dp"
+        android:backgroundTint="@color/ButtonColour"
+        android:clipToOutline="true"
+        android:text="ACCESS LOCATION" />
+
+    <TextView
+        android:text="The app will access your  device location only while using the app"
+        android:layout_marginTop="22dp"
+        android:layout_width="286dp"
+        android:layout_height="32dp"/>
+</LinearLayout>

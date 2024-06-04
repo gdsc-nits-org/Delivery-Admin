@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:background="#FFFFFF"
+    android:gravity="center_horizontal"
+    tools:context=".Fragments.LocationFragment">
+
+    <LinearLayout
+        android:gravity="center_horizontal"
+        android:layout_marginEnd="20sp"
+        android:layout_marginTop="15sp"
+        android:layout_marginStart="20sp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:text="Select A Location"
+            android:layout_marginStart="0sp"
+            android:textStyle="bold"
+            android:textSize="20sp"
+            android:textColor="#ED5D00"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+    </LinearLayout>
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_marginTop="30sp"
+        android:layout_marginStart="20sp"
+        android:layout_marginEnd="20sp"
+        android:backgroundTint="#ECE6F0"
+        android:layout_width="match_parent"
+        app:cardCornerRadius="80dp"
+        android:layout_height="50dp">
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            app:hintEnabled="false"
+            android:background="@drawable/border"
+            app:boxStrokeWidth="0dp"
+            app:boxStrokeWidthFocused="0dp">
+
+            <com.google.android.material.textfield.TextInputEditText
+
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:textColorHint="#000000"
+                android:backgroundTint="#ECE6F0"
+                android:background="@drawable/border"
+                android:drawableEnd="@drawable/icon__1_"
+                android:hint=" Search for area,street name"
+                android:textColor="#000000"
+                android:inputType="text"
+                android:paddingLeft="16dp" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+
+    <Button
+        android:textColor="#FDA405"
+        android:id="@+id/btnAddLocation"
+        android:layout_marginTop="50dp"
+        android:backgroundTint="#FEE1C7"
+        android:text="ADD ADDRESS"
+        android:textSize="14sp"
+        android:layout_width="match_parent"
+        android:layout_marginStart="20sp"
+        android:layout_marginEnd="20sp"
+        android:layout_height="48dp"/>
+
+</LinearLayout>
