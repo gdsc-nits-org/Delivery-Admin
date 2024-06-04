@@ -84,9 +84,9 @@
     </fragment>
     <activity
         android:id="@+id/emptyActivity"
-        android:name="com.example.deliveryadmin.EmptyActivity"
+        android:name="com.example.deliveryadmin.SecondActivity"
         android:label="activity_empty"
-        tools:layout="@layout/activity_empty" />
+        tools:layout="@layout/activity_second" />
     <fragment
         android:id="@+id/locationFragment"
         android:name="com.example.deliveryadmin.Fragments.LocationFragment"
