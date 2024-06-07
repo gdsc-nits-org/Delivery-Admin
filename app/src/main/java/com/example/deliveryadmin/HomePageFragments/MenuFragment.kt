@@ -12,13 +12,14 @@ import com.example.deliveryadmin.R
 import com.example.deliveryadmin.adapters.DishAdapter
 import com.example.deliveryadmin.data.dishDatasource
 import com.example.deliveryadmin.menu.AddItem
-import com.example.deliveryadmin.menu.EditItem
 import com.example.deliveryadmin.models.dishDataModel
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import com.google.firebase.auth.FirebaseAuth
 
-class MenuFragment : Fragment(), DishAdapter.OnItemClickListener {
+class MenuFragment : Fragment() {
 
     private lateinit var mydataset: List<dishDataModel>
+    private lateinit var userId: String // Add userId variable
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -27,15 +28,18 @@ class MenuFragment : Fragment(), DishAdapter.OnItemClickListener {
         // Inflate the layout for this fragment
         val rootView = inflater.inflate(R.layout.fragment_menu, container, false)
 
+        userId = FirebaseAuth.getInstance().currentUser?.uid.orEmpty() // Get the current user's ID
+
         val recyclerView = rootView.findViewById<RecyclerView>(R.id.dishes_recycler_view)
         recyclerView.layoutManager = LinearLayoutManager(activity)
 
         val dishDataSource = dishDatasource()
         dishDataSource.loadItems { data ->
-            mydataset = data // Store data in the property
-            val adapter = DishAdapter(data, requireContext())
-            adapter.setOnItemClickListener(this@MenuFragment) // Set the click listener
-            recyclerView.adapter = adapter
+            if (isAdded) {
+                mydataset = data // Store data in the property
+                val adapter = DishAdapter(data, requireContext(), userId) // Pass userId to the adapter
+                recyclerView.adapter = adapter
+            }
         }
 
         // Find the FAB and set an OnClickListener
@@ -47,15 +51,5 @@ class MenuFragment : Fragment(), DishAdapter.OnItemClickListener {
         }
 
         return rootView
-    }
-
-    override fun onItemClick(position: Int) {
-        // Handle item click here
-        val currentItem = mydataset[position]
-        val intent = Intent(activity, EditItem::class.java).apply {
-            putExtra("dishId", currentItem.id)
-            // Pass other details as needed
-        }
-        startActivity(intent)
     }
 }

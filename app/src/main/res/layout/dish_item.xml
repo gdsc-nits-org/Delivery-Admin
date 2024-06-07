@@ -70,10 +70,11 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
                     android:checked="true"
-                    android:enabled="false"
+                    android:enabled="true"
                     android:id="@+id/dishItemAvailability"
                     android:thumbTint="@color/black"
-                    android:trackTint="@color/orange" /> <!-- Set your listener for switch changes -->
+                    android:trackTint="@color/orange" />
+
             </LinearLayout>
         </LinearLayout>
 
@@ -89,7 +90,7 @@
                 android:layout_height="126dp"
                 android:scaleType="centerCrop"
                 android:id="@+id/dishItemImage"
-                android:src="@drawable/dummy_food" />
+                 />
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/editButton"
