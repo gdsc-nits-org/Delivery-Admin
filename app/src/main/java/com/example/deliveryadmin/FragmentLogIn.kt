@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.navigation.NavController
+import androidx.navigation.Navigation
 import com.example.deliveryadmin.databinding.FragmentLogInBinding
 import com.google.firebase.auth.FirebaseAuth
 
@@ -16,9 +17,9 @@ class FragmentLogIn : Fragment() {
     private lateinit var binding: FragmentLogInBinding
     private lateinit var navController: NavController
     private lateinit var auth: FirebaseAuth
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        navController = Navigation.findNavController(view)
     }
 
     override fun onCreateView(
@@ -42,6 +43,10 @@ class FragmentLogIn : Fragment() {
             {
                 Toast.makeText(requireContext(), "Enter Your Details", Toast.LENGTH_SHORT).show()
             }
+        }
+
+        binding.tvForgotPass.setOnClickListener {
+            navController.navigate(R.id.action_fragmentLogIn_to_forgotPasswordFragment)
         }
         return binding.root
     }

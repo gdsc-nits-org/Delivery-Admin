@@ -28,10 +28,22 @@
         <action
             android:id="@+id/action_fragmentLogIn_to_homeActivity"
             app:destination="@id/homeActivity" />
+        <action
+            android:id="@+id/action_fragmentLogIn_to_forgotPasswordFragment"
+            app:destination="@id/forgotPasswordFragment" />
     </fragment>
     <activity
         android:id="@+id/homeActivity"
         android:name="com.example.deliveryadmin.HomeActivity"
         android:label="activity_home"
         tools:layout="@layout/activity_home" />
+    <fragment
+        android:id="@+id/forgotPasswordFragment"
+        android:name="com.example.deliveryadmin.ForgotPasswordFragment"
+        android:label="fragment_forgot_password"
+        tools:layout="@layout/fragment_forgot_password" >
+        <action
+            android:id="@+id/action_forgotPasswordFragment_to_fragmentLogIn"
+            app:destination="@id/fragmentLogIn" />
+    </fragment>
 </navigation>
