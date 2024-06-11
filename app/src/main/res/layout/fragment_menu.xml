@@ -111,7 +111,7 @@
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="8dp"
+                android:layout_marginEnd="16dp"
                 android:text="@string/Options"
                 android:textStyle="bold"
                 android:textColor="@color/orange"
@@ -120,16 +120,17 @@
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="8dp"
+                android:layout_marginEnd="16dp"
                 android:text="@string/Options"
                 android:textStyle="bold"
                 android:textColor="@color/orange"
-                android:background="@drawable/button_border"/>
+                android:background="@drawable/button_border"
+                />
 
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="8dp"
+                android:layout_marginEnd="16dp"
                 android:textStyle="bold"
                 android:text="@string/Options"
                 android:textColor="@color/orange"
@@ -180,7 +181,7 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="true"
         android:layout_margin="16dp"
-        android:src="@drawable/fab_add"
+        android:src="@drawable/baseline_add_24"
         app:backgroundTint="@color/orange"
         app:tint="@color/white" />
 

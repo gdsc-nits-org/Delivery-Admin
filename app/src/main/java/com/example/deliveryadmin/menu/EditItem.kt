@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
+import android.widget.ImageView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.deliveryadmin.R
@@ -25,6 +26,12 @@ class EditItem : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.edit_item)
+
+        // Making the button go back when pressed
+        val backArrow: ImageView = findViewById(R.id.backArrow)
+        backArrow.setOnClickListener {
+            finish()  // Closes the current activity and returns to the previous one
+        }
 
         // Initialize Firebase Auth and Database
         auth = FirebaseAuth.getInstance()
