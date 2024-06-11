@@ -42,8 +42,9 @@
         android:padding="8dp">
 
         <androidx.cardview.widget.CardView
+            android:id="@+id/addImageCardView"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="188dp"
             app:cardCornerRadius="16dp"
             app:cardElevation="4dp"
             android:foreground="?android:attr/selectableItemBackground">
@@ -56,12 +57,26 @@
                 android:background="@drawable/dotted_border"
                 android:padding="16dp">
 
-                <ImageView
-                    android:id="@+id/addImageIcon"
-                    android:layout_width="48dp"
-                    android:layout_height="48dp"
-                    android:src="@drawable/ic_add_image"
-                    app:tint="@color/orange" />
+                <FrameLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:id="@+id/selectedImageView"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:scaleType="centerCrop"
+                        android:adjustViewBounds="true"
+                         /> <!-- Placeholder image -->
+
+                    <ImageView
+                        android:id="@+id/addImageIcon"
+                        android:layout_width="48dp"
+                        android:layout_height="48dp"
+                        android:layout_gravity="center"
+                        android:src="@drawable/ic_add_image"
+                        app:tint="@color/orange" />
+                </FrameLayout>
 
                 <TextView
                     android:id="@+id/addImageText"
@@ -73,6 +88,7 @@
                     android:layout_marginTop="8dp"/>
             </LinearLayout>
         </androidx.cardview.widget.CardView>
+
     </RelativeLayout>
 
     <LinearLayout

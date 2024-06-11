@@ -1,14 +1,12 @@
 package com.example.deliveryadmin.models
 
 data class dishDataModel(
-//    val veg : Boolean,
     val id : String = "",
     val dishName : String = "",
     val price : Int = 0,
     val ingredients: String = "",
-//    val itemStatus: Boolean,
-//    val imageUrl: String,
-){
-    // No-argument constructor required for Firebase
-    constructor() : this("", "", 0, "")
+    var itemStatus: Boolean = true,
+    var imageUrl: String = "" // Add a field for storing the image URL
+) {
+    constructor() : this("", "", 0, "", true, "")
 }
