@@ -42,6 +42,12 @@ class EditItem : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.edit_item)
 
+        // Making the button go back when pressed
+        val backArrow: ImageView = findViewById(R.id.backArrow)
+        backArrow.setOnClickListener {
+            finish()  // Closes the current activity and returns to the previous one
+        }
+
         // Initialize Firebase Auth and Database
         auth = FirebaseAuth.getInstance()
         database = FirebaseDatabase.getInstance().reference
