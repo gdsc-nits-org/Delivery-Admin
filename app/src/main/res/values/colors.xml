@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+
+        <color name="mediumOrange">#FF6500</color>
+        <color name="mediumGrey">#828282</color>
+        <color name="mediumRed">#ff4500</color>
+    <color name="hint_text_selectorad">#808080</color>
+
+
+
+
+</resources>
