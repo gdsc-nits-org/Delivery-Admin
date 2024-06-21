@@ -12,4 +12,9 @@
     <color name="Blue">#229AD2</color>
     <color name="ButtonColour">#F17A2E</color>
     <color name="LoginBtnColour">#370617</color>
+
+    <color name="mediumOrange">#FF6500</color>
+    <color name="mediumGrey">#828282</color>
+    <color name="mediumRed">#ff4500</color>
+    <color name="hint_text_selectorad">#808080</color>
 </resources>
