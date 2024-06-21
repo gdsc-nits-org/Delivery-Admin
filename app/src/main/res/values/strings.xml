@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">SearchFr</string>
+    <string name="dish_title">Dish_Title</string>
+    <string name="todo">TODO</string>
+    <string name="todoimg">TODO</string>
+    <string name="dish_titleP">Dish_Title</string>
+    <string name="todop">TODO</string>
+</resources>
