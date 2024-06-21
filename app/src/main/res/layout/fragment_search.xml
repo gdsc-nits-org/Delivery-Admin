@@ -1,14 +1,119 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".HomePageFragments.SearchFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        xmlns:tools="http://schemas.android.com/tools"
+        android:orientation="vertical"
+        android:padding="16dp">
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:src="@drawable/leftarrow" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="90dp"
+
+
+                android:text="Search"
+                android:textColor="#FF8000"
+                android:textSize="22sp"
+                android:textStyle="bold"/>
+
+
+
+
+        </LinearLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:background="#B0B0B0"
+            android:layout_marginVertical="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="75dp"
+
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <androidx.appcompat.widget.SearchView
+                android:id="@+id/SearchView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:layout_marginTop="8dp"
+                android:background="@drawable/searchview_background"
+
+                android:scrollbarSize="1dp" />
+
+
+        </LinearLayout>
+
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:paddingTop="10dp"
+            android:layout_height="wrap_content"
+
+            android:layout_marginTop="16dp"
+            android:text="RECENTLY SEARCHED"
+            android:layout_gravity="center"
+            />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recently_searched_recycler_view"
+            android:paddingTop="8dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:itemCount="3"
+            tools:listitem="@layout/recently_searced_layout"
+            android:layout_marginTop="8dp" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_marginVertical="25dp"
+            android:layout_height="8dp"
+            android:background="#B0B0B0"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingTop="15dp"
+            android:layout_marginTop="-20dp"
+            android:layout_gravity="center"
+            android:text="POPULAR DISHES"
+            />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/popular_dishes_recycler_view"
+            android:layout_width="match_parent"
+            android:paddingTop="8dp"
+            tools:listitem="@layout/popular_dishes_layout"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp" />
+
+    </LinearLayout>
 </FrameLayout>
+
+
+
