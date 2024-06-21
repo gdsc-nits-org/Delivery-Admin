@@ -25,5 +25,10 @@
     <string name="burger_king">Burger King</string>
     <string name="explore">Explore</string>
 
+    <string name="dish_title">Dish_Title</string>
+    <string name="todoimg">TODO</string>
+    <string name="dish_titleP">Dish_Title</string>
+    <string name="todop">TODO</string>
+
 
 </resources>
