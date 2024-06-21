@@ -30,5 +30,22 @@
     <string name="dish_titleP">Dish_Title</string>
     <string name="todop">TODO</string>
 
+    <string name="helload">Hello</string>
+    <string name="Your_Profilead">Your Profile</string>
+    <string name="Your_Ratingsad">Your Ratings</string>
+    <string name="Your_Ordersad">Your Orders</string>
+    <string name="Addressad">Address</string>
+    <string name="Payment_Historyad">Payment History</string>
+    <string name="Settingsad">Settings</string>
+    <string name="Log_Outad">Log Out</string>
+    <string name="Send_Feedbackad">Send Feedback</string>
+    <string name="About_usad">About us</string>
+    <string name="editad">Edit\n</string>
+    <string name="nameadmin">Name</string>
+    <string name="emailadmin">Email</string>
+    <string name="contact_noadmin">Contact No</string>
+    <string name="bioadmin">Bio</string>
+    <string name="saveadmin">Save</string>
+
 
 </resources>
