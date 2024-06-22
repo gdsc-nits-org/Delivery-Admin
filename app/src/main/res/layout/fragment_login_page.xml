@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:background="#FFFFFF"
+    tools:context=".Fragments.LoginPage">
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/backBtnLoginPage"
+        android:layout_margin="30dp"
+        app:cardBackgroundColor="#FFFFFF"
+        android:backgroundTint="#FFFFFF"
+        android:background="@drawable/button"
+        android:layout_width="43.47dp"
+        android:layout_height="43.47dp">
+
+        <ImageView
+            android:layout_gravity="center"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@drawable/arrow_back_24px"/>
+    </com.google.android.material.card.MaterialCardView>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:gravity="center_horizontal"
+        android:layout_width="match_parent"
+        android:layout_marginTop="75sp"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:text="Welcome Back!"
+            android:textColor="#0B1F44"
+            android:textSize="34.4sp"
+            android:textStyle="bold"
+            android:layout_width="336sp"
+            android:layout_height="45sp"/>
+        <TextView
+            android:text="Let's take you back where you left"
+            android:layout_width="336sp"
+            android:layout_height="wrap_content"/>
+
+        <com.google.android.material.card.MaterialCardView
+            android:layout_marginTop="53dp"
+            android:layout_width="336dp"
+            app:cardCornerRadius="2dp"
+            android:layout_height="48dp">
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                app:hintEnabled="false"
+                android:background="@drawable/border"
+                app:boxStrokeWidth="0dp"
+                app:boxStrokeWidthFocused="0dp">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:textColorHint="#000000"
+                    android:textColor="#000000"
+                    android:id="@+id/etEmailLoginPage"
+                    android:background="@drawable/border"
+                    android:hint="Enter Email ID"
+                    android:inputType="textEmailAddress"
+                    android:paddingLeft="16dp"/>
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.card.MaterialCardView
+            android:layout_marginTop="55dp"
+            android:layout_width="336dp"
+            app:cardCornerRadius="2dp"
+            android:layout_height="48dp">
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                app:hintEnabled="false"
+                app:passwordToggleEnabled="true"
+                app:passwordToggleTint="#000000"
+                android:background="@drawable/border"
+                app:boxStrokeWidth="0dp"
+                app:boxStrokeWidthFocused="0dp">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etPassLoginPage"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:textColorHint="#000000"
+                    android:background="@drawable/border"
+                    android:hint="Enter Password"
+                    android:textColor="#000000"
+                    android:inputType="textPassword"
+                    android:paddingLeft="16dp" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+
+        <LinearLayout
+            android:layout_marginTop="10sp"
+            android:layout_width="336dp"
+            android:layout_height="wrap_content"
+            android:gravity="end"
+            android:orientation="horizontal">
+
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/btnLogin"
+            android:layout_marginTop="50dp"
+            android:backgroundTint="@color/ButtonColour"
+            android:text="LOGIN"
+            android:textColor="#FFFFFF"
+            android:layout_width="336dp"
+            android:layout_height="48dp"/>
+
+        <LinearLayout
+            android:layout_marginTop="50dp"
+            android:orientation="horizontal"
+            android:layout_width="265dp"
+            android:layout_height="22dp">
+
+            <TextView
+                android:text="Don't have an account?"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+            <TextView
+                android:id="@+id/tvLoginPage"
+                android:textColor="#E85D04"
+                android:layout_marginLeft="5dp"
+                android:text="Sign Up Now"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+
+</LinearLayout>

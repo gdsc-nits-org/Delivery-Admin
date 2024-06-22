@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/splashScreen">
+
+    <fragment
+        android:id="@+id/splashScreen"
+        android:name="com.example.deliveryadmin.Fragments.SplashScreen"
+        android:label="fragment_splash_screen"
+        tools:layout="@layout/fragment_splash_screen" >
+        <action
+            android:id="@+id/action_splashScreen_to_accessLocation"
+            app:destination="@id/accessLocation" />
+        <action
+            android:id="@+id/action_splashScreen_to_emptyActivity"
+            app:destination="@id/emptyActivity" />
+    </fragment>
+    <fragment
+        android:id="@+id/accessLocation"
+        android:name="com.example.deliveryadmin.Fragments.AccessLocation"
+        android:label="fragment_access_location"
+        tools:layout="@layout/fragment_access_location" >
+        <action
+            android:id="@+id/action_accessLocation_to_animatedScreen"
+            app:destination="@id/animatedScreen" />
+        <action
+            android:id="@+id/action_accessLocation_to_animatedScreen2"
+            app:destination="@id/animatedScreen" />
+    </fragment>
+    <fragment
+        android:id="@+id/signIn"
+        android:name="com.example.deliveryadmin.Fragments.SignIn"
+        android:label="fragment_sign_in"
+        tools:layout="@layout/fragment_sign_in" >
+        <action
+            android:id="@+id/action_signIn_to_loginPage"
+            app:destination="@id/loginPage" />
+        <action
+            android:id="@+id/action_signIn_to_signUpPage"
+            app:destination="@id/signUpPage" />
+    </fragment>
+    <fragment
+        android:id="@+id/animatedScreen"
+        android:name="com.example.deliveryadmin.Fragments.AnimatedScreen"
+        android:label="fragment_animated_screen"
+        tools:layout="@layout/fragment_animated_screen" >
+        <action
+            android:id="@+id/action_animatedScreen_to_signIn"
+            app:destination="@id/signIn" />
+    </fragment>
+    <fragment
+        android:id="@+id/loginPage"
+        android:name="com.example.deliveryadmin.Fragments.LoginPage"
+        android:label="fragment_sign_up_page"
+        tools:layout="@layout/fragment_sign_up" >
+        <action
+            android:id="@+id/action_loginPage_to_signUpPage"
+            app:destination="@id/signUpPage" />
+        <action
+            android:id="@+id/action_loginPage_to_signIn"
+            app:destination="@id/signIn" />
+        <action
+            android:id="@+id/action_loginPage_to_emptyActivity"
+            app:destination="@id/emptyActivity" />
+        <action
+            android:id="@+id/action_loginPage_to_locationFragment"
+            app:destination="@id/locationFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/signUpPage"
+        android:name="com.example.deliveryadmin.Fragments.SignUp"
+        android:label="SignUpPage" >
+        <action
+            android:id="@+id/action_signUpPage_to_signIn"
+            app:destination="@id/signIn" />
+        <action
+            android:id="@+id/action_signUpPage_to_emptyActivity"
+            app:destination="@id/emptyActivity" />
+        <action
+            android:id="@+id/action_signUpPage_to_locationFragment"
+            app:destination="@id/locationFragment" />
+    </fragment>
+    <activity
+        android:id="@+id/emptyActivity"
+        android:name="com.example.deliveryadmin.SecondActivity"
+        android:label="activity_empty"
+        tools:layout="@layout/activity_second" />
+    <fragment
+        android:id="@+id/locationFragment"
+        android:name="com.example.deliveryadmin.Fragments.LocationFragment"
+        android:label="fragment_location"
+        tools:layout="@layout/fragment_location" >
+        <action
+            android:id="@+id/action_locationFragment_to_addressFragment"
+            app:destination="@id/addressFragment" />
+        <action
+            android:id="@+id/action_locationFragment_to_signIn"
+            app:destination="@id/signIn" />
+    </fragment>
+    <fragment
+        android:id="@+id/addressFragment"
+        android:name="com.example.deliveryadmin.Fragments.AddressFragment"
+        android:label="fragment_address"
+        tools:layout="@layout/fragment_address" >
+        <action
+            android:id="@+id/action_addressFragment_to_emptyActivity"
+            app:destination="@id/emptyActivity" />
+        <action
+            android:id="@+id/action_addressFragment_to_signIn"
+            app:destination="@id/signIn" />
+        <action
+            android:id="@+id/action_addressFragment_to_locationFragment"
+            app:destination="@id/locationFragment" />
+    </fragment>
+</navigation>

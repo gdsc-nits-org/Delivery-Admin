@@ -1,10 +1,12 @@
 package com.example.deliveryadmin.models
 
 data class dishDataModel(
-//    val veg : Boolean,
-    val dishName : String,
-    val price : Int,
-    val ingredients: String,
-//    val itemStatus: Boolean,
-//    val imageUrl: String,
-)
+    val id : String = "",
+    val dishName : String = "",
+    val price : Int = 0,
+    val ingredients: String = "",
+    var itemStatus: Boolean = true,
+    var imageUrl: String = "" // Add a field for storing the image URL
+) {
+    constructor() : this("", "", 0, "", true, "")
+}

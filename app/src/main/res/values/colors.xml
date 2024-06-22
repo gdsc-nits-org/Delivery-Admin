@@ -3,4 +3,18 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="orange">#F17A2E</color>
+    <color name="background">#DBDBDB</color>
+    <color name="purple">#370617</color>
+    <color name="purple2">#5E0826</color>
+    <color name="lightGrey">#9E9A9A</color>
+    <color name="yellow">#FDE074</color>
+    <color name="textOrange">#D85200</color>
+    <color name="Blue">#229AD2</color>
+    <color name="ButtonColour">#F17A2E</color>
+    <color name="LoginBtnColour">#370617</color>
+
+    <color name="mediumOrange">#FF6500</color>
+    <color name="mediumGrey">#828282</color>
+    <color name="mediumRed">#ff4500</color>
+    <color name="hint_text_selectorad">#808080</color>
 </resources>
