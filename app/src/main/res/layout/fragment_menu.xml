@@ -1,191 +1,242 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:padding="8dp">
+    android:padding="16dp">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:elevation="4dp"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.5">
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="8dp"
+            android:layout_height="75dp"
+            android:background="?android:attr/windowBackground"
             android:elevation="4dp"
-            android:background="?android:attr/windowBackground">
+            android:padding="8dp">
+
             <ImageView
                 android:id="@+id/backArrow"
                 android:layout_width="24dp"
                 android:layout_height="24dp"
                 android:layout_alignParentStart="true"
                 android:layout_centerVertical="true"
-                android:src="@drawable/orange_back_arrow"/>
+                android:src="@drawable/orange_back_arrow" />
 
             <!-- Menu Text in the Center -->
             <TextView
                 android:id="@+id/menuText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/orange"
-                android:text="@string/menu"
                 android:layout_centerInParent="true"
-                android:textSize="16sp"
-                android:letterSpacing="0"/>
+                android:gravity="center"
+                android:letterSpacing="0.1"
+                android:textStyle="bold"
+                android:text="@string/menu"
+                android:textColor="@color/orange"
+                android:textSize="18sp" />
         </RelativeLayout>
 
-        <!-- Image with rounded corners -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:padding="16dp">
+
             <ImageView
                 android:id="@+id/image"
                 android:layout_width="100dp"
                 android:layout_height="97dp"
-                android:src="@drawable/media"
                 android:scaleType="centerCrop"
-                />
+                android:src="@drawable/media" />
 
-            <!-- Content Column -->
+
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_marginStart="8dp">
+                android:layout_marginStart="8dp"
+                android:orientation="vertical">
 
                 <!-- Title Text -->
                 <TextView
-                    android:id="@+id/title"
+                    android:id="@+id/tvresturant_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Park Cafe"
                     android:textSize="22sp"
-                    />
+                    android:textStyle="bold" />
 
                 <!-- Subtitle Text -->
                 <TextView
-                    android:id="@+id/subtitle"
+                    android:id="@+id/tvresturant_location"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Masimpur, Silchar"
-                    />
+                    android:text="Masimpur, Silchar" />
 
                 <!-- Rating Row -->
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_marginTop="8dp">
+                    android:layout_marginTop="8dp"
+                    android:orientation="horizontal">
 
                     <!-- Average Rating Text -->
                     <TextView
                         android:id="@+id/avgRating"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginRight="5dp"
+                        android:fontWeight="600"
                         android:text="Avg. Rating :"
-                        android:textStyle="bold"
-                        android:fontWeight="600"/>
+                        android:textStyle="bold" />
 
                     <!-- Rating Image -->
-                    <ImageView
-                        android:id="@+id/ratingImage"
-                        android:layout_width="32dp"
-                        android:layout_height="17dp"
-                        android:layout_marginStart="8dp"
-                        android:src="@drawable/rating_4"
-                        />
+                    <FrameLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center">
+
+                        <TextView
+                            android:id="@+id/rating_number"
+                            android:layout_width="40dp"
+                            android:layout_height="match_parent"
+                            android:layout_gravity="start"
+                            android:background="@drawable/rating_background"
+                            android:backgroundTint="#4CAF50"
+                            android:gravity="right"
+                            android:paddingEnd="5dp"
+                            android:text="4.0"
+                            android:textColor="@color/white"
+                            android:textSize="13sp" />
+
+                        <ImageView
+                            android:layout_width="13sp"
+                            android:layout_height="13sp"
+                            android:layout_gravity="left"
+                            android:layout_marginStart="2dp"
+                            android:layout_marginTop="3dp"
+                            android:src="@drawable/rating_star" />
+
+                    </FrameLayout>
                 </LinearLayout>
             </LinearLayout>
         </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="16dp"
-                android:text="@string/Options"
-                android:textStyle="bold"
-                android:textColor="@color/orange"
-                android:background="@drawable/button_border"/>
-
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="16dp"
-                android:text="@string/Options"
-                android:textStyle="bold"
-                android:textColor="@color/orange"
-                android:background="@drawable/button_border"
-                />
-
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="16dp"
-                android:textStyle="bold"
-                android:text="@string/Options"
-                android:textColor="@color/orange"
-                android:background="@drawable/button_border"/>
-        </LinearLayout>
-
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="16dp">
+            android:layout_height="wrap_content">
 
-            <TextView
-                android:id="@+id/textView"
-                android:layout_width="wrap_content"
+            <HorizontalScrollView
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Starters"
-                android:textSize="24sp"
-                android:letterSpacing="0" />
+                android:scrollbars="none">
 
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/arrow_up"
-                android:layout_alignParentEnd="true"
-                android:layout_centerVertical="true" />
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <nl.bryanderidder.themedtogglebuttongroup.ThemedButton
+                        android:id="@+id/button_option1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="30dp"
+                        android:layout_margin="5dp"
+                        android:text="Option1"
+                        app:toggle_selectedBackgroundColor="@color/OnOptionSelectedcolor"/>
+
+                    <nl.bryanderidder.themedtogglebuttongroup.ThemedButton
+                        android:id="@+id/button_option2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="30dp"
+                        android:layout_margin="5dp"
+                        android:text="Option1"
+                        app:toggle_selectedBackgroundColor="@color/OnOptionSelectedcolor" />
+
+                    <nl.bryanderidder.themedtogglebuttongroup.ThemedButton
+                        android:id="@+id/button_option3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="30dp"
+                        android:layout_margin="5dp"
+                        android:text="Option1"
+                        app:toggle_selectedBackgroundColor="@color/OnOptionSelectedcolor"/>
+
+                    <nl.bryanderidder.themedtogglebuttongroup.ThemedButton
+                        android:id="@+id/button_option4"
+                        android:layout_width="wrap_content"
+                        android:layout_height="30dp"
+                        android:layout_margin="5dp"
+                        android:text="Option1"
+                        app:toggle_selectedBackgroundColor="@color/OnOptionSelectedcolor"/>
+
+                    <nl.bryanderidder.themedtogglebuttongroup.ThemedButton
+                        android:id="@+id/button_option5"
+                        android:layout_width="wrap_content"
+                        android:layout_height="30dp"
+                        android:layout_margin="5dp"
+                        android:text="Option1"
+                        app:toggle_selectedBackgroundColor="@color/OnOptionSelectedcolor"/>
+
+                    <nl.bryanderidder.themedtogglebuttongroup.ThemedButton
+                        android:id="@+id/button_option6"
+                        android:layout_width="wrap_content"
+                        android:layout_height="30dp"
+                        android:layout_margin="5dp"
+                        android:text="Option1"
+                        app:toggle_selectedBackgroundColor="@color/OnOptionSelectedcolor" />
+
+                </LinearLayout>
+            </HorizontalScrollView>
 
         </RelativeLayout>
+
+
+        <Spinner
+            android:id="@+id/spinner_availability"
+            android:layout_width="match_parent"
+            android:layout_margin="6dp"
+            android:layout_height="45dp" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginVertical="15dp"
             android:text="VEG STARTERS"
-            android:paddingTop="16dp"
-            android:paddingLeft="16dp"
-            android:textSize="22dp"/>
+            android:textStyle="bold"
+            android:letterSpacing="0.2"
+            android:textSize="13sp" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/dishes_recycler_view"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            />
+            android:layout_height="match_parent" />
     </LinearLayout>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
         android:layout_margin="16dp"
-        android:src="@drawable/baseline_add_24"
-        app:backgroundTint="@color/orange"
-        app:tint="@color/white" />
+        app:shapeAppearanceOverlay="@style/FabShape"
+        app:srcCompat="@drawable/ic_add"
+        app:tint="@color/orange"
+        android:backgroundTint="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
 
 
-</RelativeLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
 
 

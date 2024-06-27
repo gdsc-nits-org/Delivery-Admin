@@ -21,11 +21,13 @@
         <androidx.appcompat.widget.SearchView
             android:id="@+id/searchView"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="40dp"
+            app:iconifiedByDefault="false"
+            app:queryBackground="@android:color/transparent"
             android:layout_marginHorizontal="16dp"
             android:background="@drawable/roundedsearchbox"
             android:gravity="center_vertical"
-            android:queryHint="Search order"
+            app:queryHint="Search order"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -54,6 +56,7 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="20dp"
             android:ems="10"
+            android:layout_marginStart="100dp"
             android:fontFamily="serif"
             android:gravity="start"
             android:text="@string/burger_king"
@@ -62,8 +65,6 @@
             android:textSize="20sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.6"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.196" />
@@ -113,17 +114,15 @@
             android:id="@+id/tvLocation"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="70dp"
             android:ems="10"
+            android:layout_marginStart="100dp"
             android:text="@string/masimpur_silchar"
             android:textColor="@color/lightGrey"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.593"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.325"/>
+            app:layout_constraintVertical_bias="0.325" />
 
         <ImageButton
             android:id="@+id/imageButtonNotif"
@@ -173,7 +172,7 @@
                 <ImageView
                     android:id="@+id/imgBackground"
                     android:layout_width="match_parent"
-                    android:layout_height="250dp"
+                    android:layout_height="205dp"
                     android:src="@drawable/emptypot"
                     android:background="@color/white"
                     android:visibility="visible"
