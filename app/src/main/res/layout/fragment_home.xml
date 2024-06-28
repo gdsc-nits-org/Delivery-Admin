@@ -143,32 +143,33 @@
             app:srcCompat="@drawable/outline_circle_notifications_24" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
+    <!-- Scrollable Content -->
     <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         app:layout_constraintTop_toBottomOf="@id/topPanel"
-        >
+        app:layout_constraintBottom_toBottomOf="parent">
 
         <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="match_parent">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="8dp"
                 android:orientation="vertical"
-                android:layout_margin="4dp">
+                android:padding="8dp">
 
+                <!-- Current Orders -->
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/current_orders"
-                    android:elevation="30dp"
-                    android:shadowDx="@android:integer/config_longAnimTime"
                     android:textSize="20sp"
-                    android:layout_margin="4dp"
-                    android:textStyle="bold"/>
+                    android:textStyle="bold"
+                    android:layout_margin="4dp"/>
+
+                <!-- Placeholder Image -->
                 <ImageView
                     android:id="@+id/imgBackground"
                     android:layout_width="match_parent"
@@ -177,18 +178,18 @@
                     android:background="@color/white"
                     android:visibility="visible"
                     android:contentDescription="@string/todo" />
+
+                <!-- RecyclerView for Orders -->
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rvOrders"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    tools:itemCount="2"
-                    android:clickable="true"
-                    android:focusable="true"
                     android:visibility="gone"
                     android:background="@color/background"
                     tools:listitem="@layout/orders_item"
                     android:layout_marginTop="8dp"/>
 
+                <!-- Orders Today -->
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -196,22 +197,22 @@
                     android:textStyle="bold"
                     android:layout_marginVertical="16dp"
                     android:layout_marginHorizontal="4dp"
-                    android:textSize="20sp"
-                    android:elevation="30dp"/>
+                    android:textSize="20sp"/>
 
+                <!-- Cards for Pending and Delivered Orders -->
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:orientation="horizontal">
 
+                    <!-- Pending Orders Card -->
                     <androidx.cardview.widget.CardView
-                        xmlns:card_view="http://schemas.android.com/apk/res-auto"
-                        android:layout_width="match_parent"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:layout_margin="8dp"
-                        card_view:cardCornerRadius="8dp"
-                        card_view:cardElevation="16dp">
+                        app:cardCornerRadius="8dp"
+                        app:cardElevation="16dp">
 
                         <RelativeLayout
                             android:layout_width="match_parent"
@@ -244,7 +245,6 @@
                                 android:layout_height="wrap_content"
                                 android:layout_alignParentStart="true"
                                 android:layout_below="@id/tvTitlePending"
-                                android:background="@color/yellow"
                                 android:layout_marginStart="24dp"
                                 android:text="0"
                                 android:textStyle="bold"
@@ -253,14 +253,15 @@
 
                         </RelativeLayout>
                     </androidx.cardview.widget.CardView>
+
+                    <!-- Delivered Orders Card -->
                     <androidx.cardview.widget.CardView
-                        xmlns:card_view="http://schemas.android.com/apk/res-auto"
-                        android:layout_width="match_parent"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:layout_margin="8dp"
-                        card_view:cardCornerRadius="8dp"
-                        card_view:cardElevation="8dp">
+                        app:cardCornerRadius="8dp"
+                        app:cardElevation="8dp">
 
                         <RelativeLayout
                             android:layout_width="match_parent"
@@ -293,7 +294,6 @@
                                 android:layout_height="wrap_content"
                                 android:layout_alignParentStart="true"
                                 android:layout_below="@id/tvTitleDelivered"
-                                android:background="@color/Blue"
                                 android:layout_marginStart="20dp"
                                 android:paddingEnd="20dp"
                                 android:text="4"
@@ -303,7 +303,6 @@
 
                         </RelativeLayout>
                     </androidx.cardview.widget.CardView>
-
 
                 </LinearLayout>
 

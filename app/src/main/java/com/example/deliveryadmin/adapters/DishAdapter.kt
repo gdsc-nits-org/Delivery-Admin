@@ -22,6 +22,9 @@ class DishAdapter(
     private val userId: String // Include userId in the adapter constructor
 ) : RecyclerView.Adapter<DishAdapter.ItemViewHolder>() {
 
+    // Reversed dish list
+    private val reversedDishList = dishList.asReversed()
+
     inner class ItemViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val dishItemName: TextView = itemView.findViewById(R.id.dishItemName)
         val dishItemPrice: TextView = itemView.findViewById(R.id.dishItemPrice)
@@ -35,7 +38,7 @@ class DishAdapter(
             editButton.setOnClickListener {
                 val position = adapterPosition
                 if (position != RecyclerView.NO_POSITION) {
-                    val dish = dishList[position]
+                    val dish = reversedDishList[position]
                     // Open EditItem activity with dish details
                     val intent = Intent(context, EditItem::class.java).apply {
                         putExtra("dishId", dish.id)
@@ -55,7 +58,7 @@ class DishAdapter(
     }
 
     override fun onBindViewHolder(holder: ItemViewHolder, position: Int) {
-        val dish = dishList[position]
+        val dish = reversedDishList[position]
         holder.dishItemName.text = dish.dishName
         holder.dishItemPrice.text = dish.price.toString()
         holder.dishItemIngredients.text = dish.ingredients
@@ -89,5 +92,5 @@ class DishAdapter(
         }
     }
 
-    override fun getItemCount(): Int = dishList.size
+    override fun getItemCount(): Int = reversedDishList.size
 }
