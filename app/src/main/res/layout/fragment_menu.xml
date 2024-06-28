@@ -147,53 +147,60 @@
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
 
-                    <nl.bryanderidder.themedtogglebuttongroup.ThemedButton
-                        android:id="@+id/button_option1"
+                    <LinearLayout
+                        android:id="@+id/ai"
                         android:layout_width="wrap_content"
                         android:layout_height="30dp"
                         android:layout_margin="5dp"
-                        android:text="Option1"
-                        app:toggle_selectedBackgroundColor="@color/OnOptionSelectedcolor"/>
+                        android:background="@drawable/rounded_orange_button">
 
-                    <nl.bryanderidder.themedtogglebuttongroup.ThemedButton
-                        android:id="@+id/button_option2"
-                        android:layout_width="wrap_content"
-                        android:layout_height="30dp"
-                        android:layout_margin="5dp"
-                        android:text="Option1"
-                        app:toggle_selectedBackgroundColor="@color/OnOptionSelectedcolor" />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="AI"
+                            android:textColor="@color/white"
+                            android:layout_marginStart="16dp"
+                            android:layout_marginEnd="16dp"
+                            android:layout_gravity="center"
+                            />
 
-                    <nl.bryanderidder.themedtogglebuttongroup.ThemedButton
-                        android:id="@+id/button_option3"
-                        android:layout_width="wrap_content"
-                        android:layout_height="30dp"
-                        android:layout_margin="5dp"
-                        android:text="Option1"
-                        app:toggle_selectedBackgroundColor="@color/OnOptionSelectedcolor"/>
+                    </LinearLayout>
 
-                    <nl.bryanderidder.themedtogglebuttongroup.ThemedButton
-                        android:id="@+id/button_option4"
+                    <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="30dp"
                         android:layout_margin="5dp"
-                        android:text="Option1"
-                        app:toggle_selectedBackgroundColor="@color/OnOptionSelectedcolor"/>
+                        android:background="@drawable/rounded_button">
 
-                    <nl.bryanderidder.themedtogglebuttongroup.ThemedButton
-                        android:id="@+id/button_option5"
-                        android:layout_width="wrap_content"
-                        android:layout_height="30dp"
-                        android:layout_margin="5dp"
-                        android:text="Option1"
-                        app:toggle_selectedBackgroundColor="@color/OnOptionSelectedcolor"/>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Option"
+                            android:textColor="@color/black"
+                            android:layout_marginStart="16dp"
+                            android:layout_marginEnd="16dp"
+                            android:layout_gravity="center"
+                            />
 
-                    <nl.bryanderidder.themedtogglebuttongroup.ThemedButton
-                        android:id="@+id/button_option6"
+                    </LinearLayout>
+
+                    <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="30dp"
                         android:layout_margin="5dp"
-                        android:text="Option1"
-                        app:toggle_selectedBackgroundColor="@color/OnOptionSelectedcolor" />
+                        android:background="@drawable/rounded_button">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Option"
+                            android:textColor="@color/black"
+                            android:layout_marginStart="16dp"
+                            android:layout_marginEnd="16dp"
+                            android:layout_gravity="center"
+                            />
+
+                    </LinearLayout>
 
                 </LinearLayout>
             </HorizontalScrollView>

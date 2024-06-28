@@ -88,4 +88,7 @@ dependencies {
     //togglebuton
     implementation ("nl.bryanderidder:themed-toggle-button-group:1.4.1")
 
+    //gemini
+    implementation("com.google.ai.client.generativeai:generativeai:0.7.0")
+
 }
