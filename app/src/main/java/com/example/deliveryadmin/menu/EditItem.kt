@@ -9,6 +9,7 @@ import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
+import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.cardview.widget.CardView
@@ -57,8 +58,8 @@ class EditItem : AppCompatActivity() {
         val priceEditText = findViewById<EditText>(R.id.priceEditText)
         val ingredientsEditText = findViewById<EditText>(R.id.ingredientsEditText)
         val editButton = findViewById<CardView>(R.id.editButton)
-        val saveChangesButton = findViewById<Button>(R.id.saveChanges)
-        val deleteButton = findViewById<Button>(R.id.deleteButton)
+        val saveChangesButton = findViewById<LinearLayout>(R.id.saveChanges)
+        val deleteButton = findViewById<LinearLayout>(R.id.deleteButton)
 
         // Extract dish details from intent extras
         val dishId = intent.getStringExtra("dishId")

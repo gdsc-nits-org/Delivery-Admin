@@ -34,6 +34,7 @@ import kotlinx.coroutines.withContext
 import java.io.IOException
 import org.json.JSONArray
 import org.json.JSONObject
+import java.util.regex.Pattern
 
 class MenuFragment : Fragment() {
 
@@ -90,7 +91,7 @@ class MenuFragment : Fragment() {
         val aiButton = rootView.findViewById<LinearLayout>(R.id.ai)
 
         aiButton.setOnClickListener {
-            Toast.makeText(activity, "AI clicked", Toast.LENGTH_SHORT).show()
+//            Toast.makeText(activity, "AI clicked", Toast.LENGTH_SHORT).show()
             // Image selector
             val intent = Intent(Intent.ACTION_PICK)
             intent.type = "image/*"
@@ -121,7 +122,7 @@ class MenuFragment : Fragment() {
         val inputContent = content {
             image(image1)
             text("Give a JSON output of the items present here including fields" +
-                    " item name, item price and item description in one line, fill with null if not" +
+                    " item name (string), item price (integer) and item description(string) in one line, fill with null if not" +
                     " present in the menue for each item. Give a null in json if the" +
                     " image given is not a resturant menue")
         }
@@ -130,10 +131,24 @@ class MenuFragment : Fragment() {
             try {
                 val response = generativeModel.generateContent(inputContent)
                 withContext(Dispatchers.Main) {
-                    var result = response.text.toString()
-                    result = extractJsonFromString(result).toString()
-                    Toast.makeText(activity, result, Toast.LENGTH_LONG).show()
-                    processMenuItems(result)
+                    val jsonString = response.text.toString()
+                    val extractedJsonObjects = extractJsonFromString(jsonString)
+//                    Toast.makeText(activity, jsonString, Toast.LENGTH_LONG).show()
+                    extractedJsonObjects.forEach { s ->
+                        val temp = s.split('\n')
+                        val nameLine = temp[1].trim()
+                        val priceLine = temp[2].trim()
+                        val descriptionLine = temp[3].trim()
+
+                        val name = nameLine.split(':')[1].trim()
+                        val price = priceLine.split(':')[1].trim()
+                        val description = descriptionLine.split(':')[1].trim()
+
+//                        println(getName(name))
+//                        println(getNumber(price))
+//                        println(getName(description))
+                        upLoadDishToFirebase(getName(name), getNumber(price).toInt(), getName(description))
+                    }
                 }
             } catch (e: Exception) {
                 e.printStackTrace()
@@ -200,48 +215,23 @@ class MenuFragment : Fragment() {
     }
 
 
-    private fun extractAmount(input: String): Int? {
-        val numberRegex = Regex("\\d+")
-        val matchResult = numberRegex.find(input)
-        return matchResult?.value?.toIntOrNull()
+    fun getName(inputText: String): String {
+        val pattern = Pattern.compile("\"([^\"]+)\"")
+        val matcher = pattern.matcher(inputText)
+        return if (matcher.find()) {
+            matcher.group(1) ?: "null"
+        } else {
+            "null"
+        }
     }
 
-
-    fun processMenuItems(jsonString: String) {
-        try {
-            // Remove any extraneous text if necessary
-            val cleanedJsonString = jsonString.trim()
-
-            // Parse the JSON array
-            val jsonArray = JSONArray(cleanedJsonString)
-
-            // Iterate through each item in the array
-            for (i in 0 until jsonArray.length()) {
-                val jsonObject: JSONObject = jsonArray.getJSONObject(i)
-
-                // Extract keys dynamically
-                val keys = jsonObject.keys()
-                val itemName = jsonObject.optString("item_name", "")
-
-                var itemPrice = ""
-                var itemDescription = ""
-
-                // Iterate through keys and extract values
-                while (keys.hasNext()) {
-                    when (val key = keys.next()) {
-                        "item_price", "price" -> itemPrice = jsonObject.get(key).toString()
-                        "item_description", "description" -> itemDescription = jsonObject.optString(key, "")
-                    }
-                }
-
-                extractAmount(itemPrice)?.let {
-                    upLoadDishToFirebase(itemName,
-                        it, itemDescription)
-                }
-            }
-        } catch (e: Exception) {
-            e.printStackTrace()
-            // Handle parsing errors or invalid JSON input
+    fun getNumber(inputText: String): String {
+        val pattern = Pattern.compile("\\b(\\d+)\\b")
+        val matcher = pattern.matcher(inputText)
+        return if (matcher.find()) {
+            matcher.group(1) ?: ""
+        } else {
+            ""
         }
     }
 
