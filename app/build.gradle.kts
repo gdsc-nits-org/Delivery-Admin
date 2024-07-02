@@ -91,4 +91,9 @@ dependencies {
     //gemini
     implementation("com.google.ai.client.generativeai:generativeai:0.7.0")
 
+    //shimmer
+    implementation("com.facebook.shimmer:shimmer:0.5.0")
+
+    //lottie
+    implementation("com.airbnb.android:lottie:5.2.0")
 }

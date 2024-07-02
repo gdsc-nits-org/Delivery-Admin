@@ -46,6 +46,7 @@
     <string name="contact_noadmin">Contact No</string>
     <string name="bioadmin">Bio</string>
     <string name="saveadmin">Save</string>
+    <string name="no_items_available">No items available</string>
 
 
 </resources>
