@@ -84,4 +84,11 @@ dependencies {
     //glide
     implementation("com.github.bumptech.glide:glide:4.12.0")
     implementation("com.github.bumptech.glide:compiler:4.12.0")
+
+    //togglebuton
+    implementation ("nl.bryanderidder:themed-toggle-button-group:1.4.1")
+
+    //gemini
+    implementation("com.google.ai.client.generativeai:generativeai:0.7.0")
+
 }

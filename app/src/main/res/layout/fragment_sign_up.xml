@@ -1,20 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
-    android:background="#FFFFFF"
-    tools:context=".Fragments.LoginPage">
+    tools:context=".Fragments.SignUp">
 
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/backBtnSignUpPage"
-        android:backgroundTint="#FFFFFF"
-        android:layout_margin="30dp"
         android:layout_width="43.47dp"
-        android:layout_height="43.47dp">
+        android:layout_height="43.47dp"
+        android:layout_margin="30dp"
+        android:backgroundTint="#FFFFFF">
 
         <ImageView
             android:layout_width="wrap_content"
@@ -24,72 +22,74 @@
     </com.google.android.material.card.MaterialCardView>
 
     <LinearLayout
-        android:orientation="vertical"
-        android:gravity="center_horizontal"
         android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_marginTop="35sp"
-        android:layout_height="wrap_content">
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
 
         <TextView
+            android:layout_width="336sp"
+            android:layout_height="45sp"
             android:text="Let's Get Started!"
             android:textColor="#0B1F44"
             android:textSize="34.4sp"
-            android:textStyle="bold"
-            android:layout_width="336sp"
-            android:layout_height="45sp"/>
+            android:textStyle="bold" />
+
         <com.google.android.material.card.MaterialCardView
-            android:layout_marginTop="28dp"
             android:layout_width="336dp"
-            app:cardCornerRadius="2dp"
-            android:layout_height="48dp">
+            android:layout_height="48dp"
+            android:layout_marginTop="28dp"
+            app:cardCornerRadius="2dp">
 
             <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/etNameSignUpPagelayout"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
-                app:hintEnabled="false"
                 android:background="@drawable/border"
                 app:boxStrokeWidth="0dp"
-                app:boxStrokeWidthFocused="0dp">
+                app:boxStrokeWidthFocused="0dp"
+                app:hintEnabled="false">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/etNameSignUpPage"
-                    android:textColorHint="#000000"
-                    android:textColor="#000000"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
                     android:background="@drawable/border"
                     android:hint="Name"
                     android:inputType="text"
-                    android:paddingLeft="16dp" />
+                    android:paddingLeft="16dp"
+                    android:textColor="#000000"
+                    android:textColorHint="#000000" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
         </com.google.android.material.card.MaterialCardView>
 
         <com.google.android.material.card.MaterialCardView
-            android:layout_marginTop="28dp"
             android:layout_width="336dp"
-            app:cardCornerRadius="2dp"
-            android:layout_height="48dp">
+            android:layout_height="48dp"
+            android:layout_marginTop="28dp"
+            app:cardCornerRadius="2dp">
 
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
-                app:hintEnabled="false"
                 android:background="@drawable/border"
                 app:boxStrokeWidth="0dp"
-                app:boxStrokeWidthFocused="0dp">
+                app:boxStrokeWidthFocused="0dp"
+                app:hintEnabled="false">
 
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etEmailSignUpPage"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
-                    android:textColorHint="#000000"
-                    android:id="@+id/etEmailSignUpPage"
                     android:background="@drawable/border"
                     android:hint="Email ID"
-                    android:textColor="#000000"
                     android:inputType="textEmailAddress"
-                    android:paddingLeft="16dp"/>
+                    android:paddingLeft="16dp"
+                    android:textColor="#000000"
+                    android:textColorHint="#000000" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -97,62 +97,63 @@
 
 
         <com.google.android.material.card.MaterialCardView
-            android:layout_marginTop="24dp"
             android:layout_width="336dp"
-            app:cardCornerRadius="2dp"
-            android:layout_height="48dp">
+            android:layout_height="48dp"
+            android:layout_marginTop="24dp"
+            app:cardCornerRadius="2dp">
 
             <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/etPassSignUpPagelayout"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
-                app:hintEnabled="false"
-                app:passwordToggleEnabled="true"
-                app:passwordToggleTint="#000000"
                 android:background="@drawable/border"
                 app:boxStrokeWidth="0dp"
-                app:boxStrokeWidthFocused="0dp">
+                app:boxStrokeWidthFocused="0dp"
+                app:hintEnabled="false"
+                app:passwordToggleEnabled="true"
+                app:passwordToggleTint="#000000">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/etPassSignUpPage"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
-                    android:textColor="#000000"
-                    android:textColorHint="#000000"
                     android:background="@drawable/border"
                     android:hint="Enter Your Password"
                     android:inputType="textPassword"
-                    android:paddingLeft="16dp" />
+                    android:paddingLeft="16dp"
+                    android:textColor="#000000"
+                    android:textColorHint="#000000" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
         </com.google.android.material.card.MaterialCardView>
 
         <com.google.android.material.card.MaterialCardView
-            android:layout_marginTop="24dp"
             android:layout_width="336dp"
-            app:cardCornerRadius="2dp"
-            android:layout_height="48dp">
+            android:layout_height="48dp"
+            android:layout_marginTop="24dp"
+            app:cardCornerRadius="2dp">
 
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
-                app:hintEnabled="false"
-                app:passwordToggleEnabled="true"
                 android:background="@drawable/border"
                 app:boxStrokeWidth="0dp"
-                app:passwordToggleTint="#000000"
-                app:boxStrokeWidthFocused="0dp">
+                app:boxStrokeWidthFocused="0dp"
+                app:hintEnabled="false"
+                app:passwordToggleEnabled="true"
+                app:passwordToggleTint="#000000">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/etRePassSignUpPage"
                     android:layout_width="match_parent"
-                    android:textColorHint="#000000"
-                    android:textColor="#000000"
                     android:layout_height="50dp"
                     android:background="@drawable/border"
                     android:hint="Re-Enter Your Password"
                     android:inputType="textPassword"
-                    android:paddingLeft="16dp" />
+                    android:paddingLeft="16dp"
+                    android:textColor="#000000"
+                    android:textColorHint="#000000" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -160,14 +161,36 @@
 
 
         <Button
-            android:textColor="#FFFFFF"
             android:id="@+id/btnSignUp"
+            android:layout_width="336dp"
+            android:layout_height="48dp"
             android:layout_marginTop="50dp"
             android:backgroundTint="@color/ButtonColour"
             android:text="SIGN UP"
-            android:textSize="14sp"
-            android:layout_width="336dp"
-            android:layout_height="48dp"/>
+            android:textColor="#FFFFFF"
+            android:textSize="14sp" />
+
+        <LinearLayout
+            android:layout_width="265dp"
+            android:layout_height="22dp"
+            android:layout_marginTop="40dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingStart="25dp"
+                android:text="Already Have an Account?" />
+
+            <TextView
+                android:id="@+id/tvLoginPage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:text="Login"
+                android:textColor="#E85D04" />
+
+        </LinearLayout>
 
     </LinearLayout>
 
