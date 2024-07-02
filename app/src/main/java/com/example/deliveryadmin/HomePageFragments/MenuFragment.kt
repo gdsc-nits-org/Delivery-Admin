@@ -15,11 +15,13 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.airbnb.lottie.LottieAnimationView
 import com.example.deliveryadmin.R
 import com.example.deliveryadmin.adapters.DishAdapter
 import com.example.deliveryadmin.data.dishDatasource
 import com.example.deliveryadmin.menu.AddItem
 import com.example.deliveryadmin.models.dishDataModel
+import com.facebook.shimmer.ShimmerFrameLayout
 import com.google.ai.client.generativeai.GenerativeModel
 import com.google.ai.client.generativeai.type.content
 import com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -37,6 +39,10 @@ import org.json.JSONObject
 import java.util.regex.Pattern
 
 class MenuFragment : Fragment() {
+    private lateinit var shimmerFrameLayout: ShimmerFrameLayout
+    private lateinit var recyclerView: RecyclerView
+    private lateinit var emptyStateLayout: LinearLayout
+    private lateinit var animationView: LottieAnimationView
 
     private lateinit var mydataset: List<dishDataModel>
     private lateinit var userId: String // Add userId variable
@@ -56,22 +62,39 @@ class MenuFragment : Fragment() {
 
         userId = FirebaseAuth.getInstance().currentUser?.uid.orEmpty() // Get the current user's ID
 
-        val recyclerView = rootView.findViewById<RecyclerView>(R.id.dishes_recycler_view)
+        recyclerView = rootView.findViewById(R.id.dishes_recycler_view)
         recyclerView.layoutManager = LinearLayoutManager(activity)
 
+        shimmerFrameLayout = rootView.findViewById(R.id.shimmer_view_container)
+
+        emptyStateLayout = rootView.findViewById(R.id.empty_state_layout)
+        animationView = rootView.findViewById(R.id.animationView)
+
         val dishDataSource = dishDatasource()
+        shimmerFrameLayout.startShimmer()
         dishDataSource.loadItems { data ->
             if (isAdded) {
                 mydataset = data // Store data in the property
                 val adapter = DishAdapter(data, requireContext(), userId) // Pass userId to the adapter
                 recyclerView.adapter = adapter
+                shimmerFrameLayout.stopShimmer()
+                shimmerFrameLayout.visibility = View.GONE
+
+                // Show/hide empty state based on dataset
+                if (data.isEmpty()) {
+                    emptyStateLayout.visibility = View.VISIBLE
+                    recyclerView.visibility = View.GONE
+                    animationView.playAnimation()
+                } else {
+                    emptyStateLayout.visibility = View.GONE
+                    recyclerView.visibility = View.VISIBLE
+                }
             }
         }
 
-        // Find the FAB and set an OnClickListener
+
         val fab = rootView.findViewById<FloatingActionButton>(R.id.fab)
         fab.setOnClickListener {
-            // Inside your RecyclerView adapter's click listener
             val intent = Intent(activity, AddItem::class.java)
             startActivity(intent)
         }
@@ -79,8 +102,6 @@ class MenuFragment : Fragment() {
         // Firebase Part
         auth = FirebaseAuth.getInstance()
         database = FirebaseDatabase.getInstance().reference
-
-
 
         // Gemini AI part
         generativeModel = GenerativeModel(
@@ -214,7 +235,6 @@ class MenuFragment : Fragment() {
         return jsonObjects
     }
 
-
     fun getName(inputText: String): String {
         val pattern = Pattern.compile("\"([^\"]+)\"")
         val matcher = pattern.matcher(inputText)
@@ -234,5 +254,4 @@ class MenuFragment : Fragment() {
             ""
         }
     }
-
 }

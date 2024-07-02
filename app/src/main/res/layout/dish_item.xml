@@ -38,7 +38,8 @@
                 android:layout_height="wrap_content"
                 android:text="Dish Name"
                 android:id="@+id/dishItemName"
-                android:textSize="22sp" />
+                android:textSize="22sp"
+                />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -52,7 +53,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/dishItemIngredients"
-                android:text="Ingredients Ingredients\nIngredients Ingredients" />
+                android:text="Ingredients Ingredients" />
 
             <LinearLayout
                 android:layout_width="wrap_content"

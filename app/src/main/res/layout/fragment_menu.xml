@@ -214,19 +214,36 @@
             android:layout_margin="6dp"
             android:layout_height="45dp" />
 
-        <TextView
-            android:layout_width="wrap_content"
+        <com.facebook.shimmer.ShimmerFrameLayout
+            android:id="@+id/shimmer_view_container"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginVertical="15dp"
-            android:text="VEG STARTERS"
-            android:textStyle="bold"
-            android:letterSpacing="0.2"
-            android:textSize="13sp" />
+            android:visibility="visible"
+            app:shimmer_auto_start="true"
+            app:shimmer_duration="1500">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="8dp">
+
+                <!-- Shimmer items go here -->
+                <include layout="@layout/shimmer_layout" />
+            </LinearLayout>
+
+        </com.facebook.shimmer.ShimmerFrameLayout>
+
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/dishes_recycler_view"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
+
+        <include
+            android:id="@+id/empty_state_layout"
+            layout="@layout/empty_state_layout"
+            android:visibility="gone" />
     </LinearLayout>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -245,5 +262,3 @@
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
-
-
