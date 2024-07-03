@@ -18,4 +18,6 @@
     <color name="mediumRed">#ff4500</color>
     <color name="hint_text_selectorad">#808080</color>
     <color name="OnOptionSelectedcolor">#C9EA8C50</color>
+    <color name="transparent">#00000000</color>
+
 </resources>
