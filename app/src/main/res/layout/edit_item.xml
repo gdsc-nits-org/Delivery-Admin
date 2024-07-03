@@ -44,17 +44,27 @@
             android:layout_height="188dp"
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
-            app:cardCornerRadius="16dp">
+            app:cardCornerRadius="16dp"
 
-            <!-- ImageView to display the item image -->
-            <ImageView
-                android:id="@+id/selectedImage"
+            >
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:scaleType="centerCrop"
-                android:layout_gravity="center"
-                android:adjustViewBounds="true"
-                android:src="@drawable/dummy_food" />
+                android:orientation="vertical"
+                android:gravity="center"
+                android:background="@drawable/dotted_border"
+                android:padding="1dp">
+
+                <ImageView
+                    android:id="@+id/selectedImage"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:scaleType="centerCrop"
+                    android:layout_gravity="center"
+                    android:adjustViewBounds="true"
+                    android:src="@drawable/dummy_food" />
+
+            </LinearLayout>
         </androidx.cardview.widget.CardView>
 
 
@@ -137,8 +147,30 @@
                 android:inputType="text" />
         </com.google.android.material.textfield.TextInputLayout>
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="16dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/select_category"
+                android:textSize="16sp"
+                android:layout_marginBottom="8dp" />
+
+            <Spinner
+                android:id="@+id/vegNonVegSpinner"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="8dp"
+                android:entries="@array/veg_non_veg_options"
+                />
+        </LinearLayout>
 
         <LinearLayout
+            android:layout_marginTop="50dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="16dp"

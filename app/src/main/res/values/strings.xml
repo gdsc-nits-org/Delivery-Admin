@@ -47,6 +47,11 @@
     <string name="bioadmin">Bio</string>
     <string name="saveadmin">Save</string>
     <string name="no_items_available">No items available</string>
+    <string name="select_category">Select Category</string>
+    <string-array name="veg_non_veg_options">
+        <item>Veg</item>
+        <item>Non-Veg</item>
+    </string-array>
 
 
 </resources>

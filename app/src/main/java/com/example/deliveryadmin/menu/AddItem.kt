@@ -6,11 +6,7 @@ import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import android.widget.Button
-import android.widget.EditText
-import android.widget.ImageView
-import android.widget.LinearLayout
-import android.widget.Toast
+import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.cardview.widget.CardView
 import com.example.deliveryadmin.R
@@ -34,6 +30,7 @@ class AddItem : AppCompatActivity() {
     private lateinit var auth: FirebaseAuth
     private lateinit var storageReference: StorageReference
     private var imageUri: Uri? = null
+    private var isVeg: Boolean = true // Default to vegetarian
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -55,17 +52,31 @@ class AddItem : AppCompatActivity() {
         val itemDescriptionInput = findViewById<EditText>(R.id.itemDescriptionInput)
         val addImageCardView = findViewById<CardView>(R.id.addImageCardView)
         val saveButton = findViewById<LinearLayout>(R.id.saveButton)
+        val categorySpinner = findViewById<Spinner>(R.id.categorySpinner)
 
         addImageCardView.setOnClickListener {
             ImagePicker.with(this)
-                .cropSquare() // Crop image to square
-                .compress(1024) // Final image size will be less than 1 MB
-                .maxResultSize(1080, 1080) // Final image resolution will be less than 1080 x 1080
+                .cropSquare()
+                .compress(1024)
+                .maxResultSize(1080, 1080)
                 .start()
         }
 
         saveButton.setOnClickListener {
             checkAuthentication()
+        }
+
+        val categories = arrayOf("Veg", "Non-Veg")
+        val adapter = ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, categories)
+        categorySpinner.adapter = adapter
+
+        categorySpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(parent: AdapterView<*>, view: View?, position: Int, id: Long) {
+                isVeg = position == 0
+            }
+
+            override fun onNothingSelected(parent: AdapterView<*>) {
+            }
         }
     }
 
@@ -85,12 +96,9 @@ class AddItem : AppCompatActivity() {
     private fun checkAuthentication() {
         val currentUser: FirebaseUser? = auth.currentUser
         if (currentUser != null) {
-            // User is signed in, proceed with saving the item
             saveItem()
         } else {
-            // No user is signed in, prompt the user to sign in
             Toast.makeText(this, "Please sign in to save the item", Toast.LENGTH_SHORT).show()
-            // You can also consider redirecting the user to the sign-in activity or showing a dialog.
         }
     }
 
@@ -114,7 +122,11 @@ class AddItem : AppCompatActivity() {
         } else {
             saveItemToFirebase(itemName, itemPrice, itemDescription, imageUrl = null)
         }
+
+        // Finish the activity immediately after initiating the save operation
+        finish()
     }
+
 
     private fun uploadImageToFirebase(imageUri: Uri, callback: (String) -> Unit) {
         // Start a coroutine for the upload operation
@@ -124,7 +136,6 @@ class AddItem : AppCompatActivity() {
                 val uploadTask = imageRef.putFile(imageUri).await()
                 val imageUrl = uploadTask.storage.downloadUrl.await().toString()
                 withContext(Dispatchers.Main) {
-                    // Callback with the image URL on the main thread
                     callback(imageUrl)
                 }
             } catch (e: Exception) {
@@ -149,7 +160,8 @@ class AddItem : AppCompatActivity() {
                 dishName = name,
                 price = price,
                 ingredients = description,
-                imageUrl = imageUrl ?: ""
+                imageUrl = imageUrl ?: "",
+                veg = isVeg
             )
 
             dishRef.setValue(dish)
@@ -168,3 +180,4 @@ class AddItem : AppCompatActivity() {
         }
     }
 }
+
