@@ -67,6 +67,9 @@
         <action
             android:id="@+id/action_loginPage_to_locationFragment"
             app:destination="@id/locationFragment" />
+        <action
+            android:id="@+id/action_loginPage_to_forgotPasswordFragment"
+            app:destination="@id/forgotPasswordFragment" />
     </fragment>
     <fragment
         android:id="@+id/signUpPage"
@@ -81,6 +84,9 @@
         <action
             android:id="@+id/action_signUpPage_to_locationFragment"
             app:destination="@id/locationFragment" />
+        <action
+            android:id="@+id/action_signUpPage_to_loginPage"
+            app:destination="@id/loginPage" />
     </fragment>
     <activity
         android:id="@+id/emptyActivity"
@@ -113,5 +119,13 @@
         <action
             android:id="@+id/action_addressFragment_to_locationFragment"
             app:destination="@id/locationFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/forgotPasswordFragment"
+        android:name="com.example.deliveryadmin.Fragments.ForgotPasswordFragment"
+        android:label="ForgotPasswordFragment" >
+        <action
+            android:id="@+id/action_forgotPasswordFragment_to_loginPage"
+            app:destination="@id/loginPage" />
     </fragment>
 </navigation>

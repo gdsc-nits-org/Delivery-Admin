@@ -2,6 +2,7 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="dark_white">#FFF0F0F0</color>
     <color name="orange">#F17A2E</color>
     <color name="background">#DBDBDB</color>
     <color name="purple">#370617</color>
@@ -12,9 +13,11 @@
     <color name="Blue">#229AD2</color>
     <color name="ButtonColour">#F17A2E</color>
     <color name="LoginBtnColour">#370617</color>
-
     <color name="mediumOrange">#FF6500</color>
     <color name="mediumGrey">#828282</color>
     <color name="mediumRed">#ff4500</color>
     <color name="hint_text_selectorad">#808080</color>
+    <color name="OnOptionSelectedcolor">#C9EA8C50</color>
+    <color name="transparent">#00000000</color>
+
 </resources>

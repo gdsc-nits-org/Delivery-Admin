@@ -6,7 +6,8 @@ data class dishDataModel(
     val price : Int = 0,
     val ingredients: String = "",
     var itemStatus: Boolean = true,
-    var imageUrl: String = "" // Add a field for storing the image URL
+    var imageUrl: String = "",
+    var veg: Boolean = true
 ) {
-    constructor() : this("", "", 0, "", true, "")
+    constructor() : this("", "", 0, "", true, "", true)
 }

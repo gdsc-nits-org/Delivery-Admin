@@ -84,4 +84,16 @@ dependencies {
     //glide
     implementation("com.github.bumptech.glide:glide:4.12.0")
     implementation("com.github.bumptech.glide:compiler:4.12.0")
+
+    //togglebuton
+    implementation ("nl.bryanderidder:themed-toggle-button-group:1.4.1")
+
+    //gemini
+    implementation("com.google.ai.client.generativeai:generativeai:0.7.0")
+
+    //shimmer
+    implementation("com.facebook.shimmer:shimmer:0.5.0")
+
+    //lottie
+    implementation("com.airbnb.android:lottie:5.2.0")
 }
