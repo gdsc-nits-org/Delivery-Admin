@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:padding="8dp"
     android:elevation="4dp"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:padding="8dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -35,25 +35,24 @@
                 android:src="@drawable/vegetarian_food_symbol" />
 
             <TextView
+                android:id="@+id/dishItemName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Dish Name"
-                android:id="@+id/dishItemName"
-                android:textSize="22sp"
-                />
+                android:textSize="22sp" />
 
             <TextView
+                android:id="@+id/dishItemPrice"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="8dp"
                 android:text="$20"
-                android:id="@+id/dishItemPrice"
                 android:textSize="20sp" />
 
             <TextView
+                android:id="@+id/dishItemIngredients"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/dishItemIngredients"
                 android:text="Ingredients Ingredients" />
 
             <LinearLayout
@@ -68,12 +67,12 @@
                     android:text="Item Status" />
 
                 <Switch
+                    android:id="@+id/dishItemAvailability"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
                     android:checked="true"
                     android:enabled="true"
-                    android:id="@+id/dishItemAvailability"
                     android:thumbTint="@color/black"
                     android:trackTint="@color/orange" />
 
@@ -91,11 +90,9 @@
                 android:id="@+id/dishItemImage"
                 android:layout_width="130dp"
                 android:layout_height="126dp"
-                android:scaleType="centerCrop"
                 android:padding="8dp"
-                app:shapeAppearanceOverlay="@style/RoundedImage"
-                 />
-
+                android:scaleType="centerCrop"
+                app:shapeAppearanceOverlay="@style/RoundedImage" />
 
 
             <androidx.cardview.widget.CardView
@@ -104,15 +101,13 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentBottom="true"
-                app:cardCornerRadius="8.3dp"
-                >
+                app:cardCornerRadius="8.3dp">
 
                 <ImageView
                     android:layout_width="36dp"
                     android:layout_height="36dp"
                     android:scaleType="centerCrop"
-                    android:src="@drawable/edit_button"
-                    />
+                    android:src="@drawable/edit_button" />
             </androidx.cardview.widget.CardView>
         </RelativeLayout>
 
