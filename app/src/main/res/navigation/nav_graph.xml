@@ -123,7 +123,8 @@
     <fragment
         android:id="@+id/forgotPasswordFragment"
         android:name="com.example.deliveryadmin.Fragments.ForgotPasswordFragment"
-        android:label="ForgotPasswordFragment" >
+        android:label="ForgotPasswordFragment"
+        tools:layout="@layout/fragment_forgot_password">
         <action
             android:id="@+id/action_forgotPasswordFragment_to_loginPage"
             app:destination="@id/loginPage" />

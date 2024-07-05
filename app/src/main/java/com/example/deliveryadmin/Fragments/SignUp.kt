@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import com.example.deliveryadmin.R
+import com.example.deliveryadmin.Utils.FirebaseManager
 import com.example.deliveryadmin.databinding.FragmentSignUpBinding
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
@@ -39,8 +40,8 @@ class SignUp : Fragment() {
 
         binding.btnSignUp.setOnClickListener {
             if (checkAllFields()) {
-                auth = FirebaseAuth.getInstance()
-                database = FirebaseDatabase.getInstance()
+                auth = FirebaseManager.getFirebaseAuth()
+                database = FirebaseManager.getFirebaseDatabase()
 
                 val email = binding.etEmailSignUpPage.text.toString().trim()
                 val password = binding.etPassSignUpPage.text.toString().trim()
@@ -61,7 +62,6 @@ class SignUp : Fragment() {
             if (it.isSuccessful) {
                 Toast.makeText(context, "Login Successfully", Toast.LENGTH_SHORT).show()
                 navController.navigate(R.id.action_signUpPage_to_locationFragment)
-
             } else {
                 Toast.makeText(
                     context,
