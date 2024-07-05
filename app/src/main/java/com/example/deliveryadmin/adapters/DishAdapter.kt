@@ -30,6 +30,7 @@ class DishAdapter(
         val dishItemPrice: TextView = itemView.findViewById(R.id.dishItemPrice)
         val dishItemIngredients: TextView = itemView.findViewById(R.id.dishItemIngredients)
         val dishItemImage: ImageView = itemView.findViewById(R.id.dishItemImage)
+        val dishVegNonVegImage:ImageView = itemView.findViewById(R.id.vegNonVegSymbol)
         val editButton: CardView = itemView.findViewById(R.id.editButton)
         val dishItemAvailability: Switch = itemView.findViewById(R.id.dishItemAvailability)
 
@@ -45,6 +46,7 @@ class DishAdapter(
                         putExtra("dishName", dish.dishName)
                         putExtra("price", dish.price)
                         putExtra("ingredients", dish.ingredients)
+                        putExtra("veg",dish.veg)
                     }
                     context.startActivity(intent)
                 }
@@ -70,6 +72,9 @@ class DishAdapter(
             .placeholder(R.drawable.dummy_food) // Optional placeholder image
             .error(R.drawable.dummy_food) // Optional error image
             .into(holder.dishItemImage)
+
+        val vegNonVegResource = if (dish.veg) R.drawable.vegetarian_food_symbol else R.drawable.non_vegetarian_food_symbol
+        holder.dishVegNonVegImage.setImageResource(vegNonVegResource)
 
         holder.dishItemAvailability.setOnCheckedChangeListener(null) // Reset the listener to avoid unwanted triggers
         holder.dishItemAvailability.isChecked = dish.itemStatus

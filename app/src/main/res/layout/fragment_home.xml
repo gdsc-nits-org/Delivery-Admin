@@ -14,25 +14,24 @@
         android:background="@color/purple"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        >
+        app:layout_constraintTop_toTopOf="parent">
         <!--        Will use Glide Library-->
 
         <androidx.appcompat.widget.SearchView
             android:id="@+id/searchView"
             android:layout_width="match_parent"
             android:layout_height="40dp"
-            app:iconifiedByDefault="false"
-            app:queryBackground="@android:color/transparent"
             android:layout_marginHorizontal="16dp"
             android:background="@drawable/roundedsearchbox"
             android:gravity="center_vertical"
-            app:queryHint="Search order"
+            app:iconifiedByDefault="false"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.901" />
+            app:layout_constraintVertical_bias="0.901"
+            app:queryBackground="@android:color/transparent"
+            app:queryHint="Search order" />
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/ivLogo"
@@ -40,23 +39,23 @@
             android:layout_height="50dp"
             android:layout_marginBottom="10dp"
             android:clickable="true"
-            android:focusable="true"
             android:contentDescription="@string/todo"
+            android:focusable="true"
+            android:src="@drawable/dummy_food"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.044"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.226"
-            android:src="@drawable/dummy_food" />
+            app:layout_constraintVertical_bias="0.226" />
 
         <TextView
             android:id="@+id/tvTitleShop"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="100dp"
             android:layout_marginBottom="20dp"
             android:ems="10"
-            android:layout_marginStart="100dp"
             android:fontFamily="serif"
             android:gravity="start"
             android:text="@string/burger_king"
@@ -114,8 +113,8 @@
             android:id="@+id/tvLocation"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:ems="10"
             android:layout_marginStart="100dp"
+            android:ems="10"
             android:text="@string/masimpur_silchar"
             android:textColor="@color/lightGrey"
             android:textStyle="bold"
@@ -147,8 +146,8 @@
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        app:layout_constraintTop_toBottomOf="@id/topPanel"
-        app:layout_constraintBottom_toBottomOf="parent">
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/topPanel">
 
         <ScrollView
             android:layout_width="match_parent"
@@ -164,40 +163,40 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_margin="4dp"
                     android:text="@string/current_orders"
                     android:textSize="20sp"
-                    android:textStyle="bold"
-                    android:layout_margin="4dp"/>
+                    android:textStyle="bold" />
 
                 <!-- Placeholder Image -->
                 <ImageView
                     android:id="@+id/imgBackground"
                     android:layout_width="match_parent"
                     android:layout_height="205dp"
-                    android:src="@drawable/emptypot"
                     android:background="@color/white"
-                    android:visibility="visible"
-                    android:contentDescription="@string/todo" />
+                    android:contentDescription="@string/todo"
+                    android:src="@drawable/emptypot"
+                    android:visibility="visible" />
 
                 <!-- RecyclerView for Orders -->
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rvOrders"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:visibility="gone"
+                    android:layout_marginTop="8dp"
                     android:background="@color/background"
-                    tools:listitem="@layout/orders_item"
-                    android:layout_marginTop="8dp"/>
+                    android:visibility="gone"
+                    tools:listitem="@layout/orders_item" />
 
                 <!-- Orders Today -->
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Orders Today"
-                    android:textStyle="bold"
-                    android:layout_marginVertical="16dp"
                     android:layout_marginHorizontal="4dp"
-                    android:textSize="20sp"/>
+                    android:layout_marginVertical="16dp"
+                    android:text="Orders Today"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
 
                 <!-- Cards for Pending and Delivered Orders -->
                 <LinearLayout
@@ -209,8 +208,8 @@
                     <androidx.cardview.widget.CardView
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
                         android:layout_margin="8dp"
+                        android:layout_weight="1"
                         app:cardCornerRadius="8dp"
                         app:cardElevation="16dp">
 
@@ -227,29 +226,30 @@
 
                             <TextView
                                 android:id="@+id/tvTitlePending"
-                                android:layout_width="wrap_content"
+                                android:layout_width="120dp"
                                 android:layout_height="wrap_content"
                                 android:layout_alignParentStart="true"
                                 android:layout_alignParentTop="true"
-                                android:layout_marginTop="15dp"
                                 android:layout_marginStart="24dp"
-                                android:text="Pending"
+                                android:layout_marginTop="15dp"
                                 android:background="@color/yellow"
+                                android:text="Pending"
                                 android:textColor="#DA5300"
                                 android:textSize="22sp"
                                 android:textStyle="normal" />
 
                             <TextView
                                 android:id="@+id/tvDescPending"
-                                android:layout_width="wrap_content"
+                                android:layout_width="50dp"
                                 android:layout_height="wrap_content"
-                                android:layout_alignParentStart="true"
                                 android:layout_below="@id/tvTitlePending"
+                                android:layout_alignParentStart="true"
                                 android:layout_marginStart="24dp"
+                                android:background="#FEE175"
                                 android:text="0"
-                                android:textStyle="bold"
                                 android:textColor="@color/textOrange"
-                                android:textSize="24sp" />
+                                android:textSize="24dp"
+                                android:textStyle="bold" />
 
                         </RelativeLayout>
                     </androidx.cardview.widget.CardView>
@@ -258,8 +258,8 @@
                     <androidx.cardview.widget.CardView
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
                         android:layout_margin="8dp"
+                        android:layout_weight="1"
                         app:cardCornerRadius="8dp"
                         app:cardElevation="8dp">
 
@@ -276,30 +276,31 @@
 
                             <TextView
                                 android:id="@+id/tvTitleDelivered"
-                                android:layout_width="wrap_content"
+                                android:layout_width="120dp"
                                 android:layout_height="wrap_content"
                                 android:layout_alignParentStart="true"
                                 android:layout_alignParentTop="true"
-                                android:layout_marginTop="15dp"
                                 android:layout_marginStart="22dp"
-                                android:text="Completed"
+                                android:layout_marginTop="15dp"
                                 android:background="#229AD2"
+                                android:text="Completed"
                                 android:textColor="@color/white"
                                 android:textSize="22sp"
                                 android:textStyle="normal" />
 
                             <TextView
                                 android:id="@+id/tvDescDelivered"
-                                android:layout_width="wrap_content"
+                                android:layout_width="50dp"
                                 android:layout_height="wrap_content"
-                                android:layout_alignParentStart="true"
                                 android:layout_below="@id/tvTitleDelivered"
+                                android:layout_alignParentStart="true"
                                 android:layout_marginStart="20dp"
+                                android:background="#229AD3"
                                 android:paddingEnd="20dp"
                                 android:text="4"
-                                android:textStyle="bold"
                                 android:textColor="@color/white"
-                                android:textSize="24sp" />
+                                android:textSize="24dp"
+                                android:textStyle="bold" />
 
                         </RelativeLayout>
                     </androidx.cardview.widget.CardView>

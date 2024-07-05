@@ -55,7 +55,10 @@ class EditItem: AppCompatActivity() {
         vegNonVegSpinner = findViewById(R.id.vegNonVegSpinner)
 
         val dishId = intent.getStringExtra("dishId")
+        val veg = intent.getBooleanExtra("veg", true)
         val userId = auth.currentUser?.uid
+
+        vegNonVegSpinner.setSelection(if (veg) 0 else 1)
 
         if (!dishId.isNullOrEmpty() && !userId.isNullOrEmpty()) {
             val dishRef = database.child("dishes").child(userId).child(dishId)
