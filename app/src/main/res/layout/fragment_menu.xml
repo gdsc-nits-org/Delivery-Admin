@@ -231,8 +231,7 @@
                 android:layout_weight="5"
                 android:visibility="gone"
                 android:queryHint="Search Dishes"
-                app:iconifiedByDefault="true"
-                android:backgroundTint="@color/white" />
+                app:iconifiedByDefault="true"/>
         </LinearLayout>
 
 

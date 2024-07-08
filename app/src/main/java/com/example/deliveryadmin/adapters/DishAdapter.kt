@@ -17,7 +17,10 @@ import com.bumptech.glide.Glide
 import com.example.deliveryadmin.R
 import com.example.deliveryadmin.menu.EditItem
 import com.example.deliveryadmin.models.dishDataModel
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
 import java.util.*
 
 class DishAdapter(
@@ -127,7 +130,6 @@ class DishAdapter(
             val vegNonVegResource = if (dish.veg) R.drawable.vegetarian_food_symbol else R.drawable.non_vegetarian_food_symbol
             dishVegNonVegImage.setImageResource(vegNonVegResource)
 
-            // Set tag to identify the current item in the listener
             dishItemAvailability.tag = dish.id
         }
     }
@@ -135,29 +137,46 @@ class DishAdapter(
     private fun updateItemStatus(dish: dishDataModel, isChecked: Boolean) {
         val database = FirebaseDatabase.getInstance()
             .getReference("dishes")
-            .child(userId) // Use userId to navigate to the correct user's dishes
+            .child(userId)
             .child(dish.id)
 
         database.child("itemStatus").setValue(isChecked)
             .addOnCompleteListener { task ->
                 if (task.isSuccessful) {
-                    dish.itemStatus = isChecked // Update the local model's status
 
-                    // Get the current visible position before notifying item change
-                    val currentScrollPosition = layoutManager.findFirstVisibleItemPosition()
-
-                    // Notify the adapter that the item at a specific position has changed
-                    val adapterPosition = filteredDishList.indexOf(dish)
-                    if (adapterPosition != -1) {
-                        notifyItemChanged(adapterPosition)
+                    val index = filteredDishList.indexOf(dish)
+                    if (index != -1) {
+                        filteredDishList[index].itemStatus = isChecked
+                        notifyItemChanged(index)
                     }
-
-                    // Scroll back to the original position after the item has been updated
-                    layoutManager.scrollToPosition(currentScrollPosition)
                 } else {
-                    // Handle the failure, maybe revert the switch state
-                    // This depends on your app's logic and user experience
+                    // Handle failure, maybe revert the switch state
                 }
             }
+    }
+
+    private val itemStatusListener = object : ValueEventListener {
+        override fun onDataChange(snapshot: DataSnapshot) {
+            // This listener now updates the entire list when there are changes
+            if (snapshot.exists()) {
+                val updatedDishList = mutableListOf<dishDataModel>()
+                for (dishSnapshot in snapshot.children) {
+                    val dish = dishSnapshot.getValue(dishDataModel::class.java)
+                    dish?.let { updatedDishList.add(it) }
+                }
+                updateData(updatedDishList) // Update the adapter with the newlist
+            }
+        }
+
+        override fun onCancelled(error: DatabaseError) {
+            // Handle database errors
+        }
+    }
+
+    init {
+        val database = FirebaseDatabase.getInstance()
+        .getReference("dishes")
+            .child(userId)
+        database.addValueEventListener(itemStatusListener)
     }
 }
