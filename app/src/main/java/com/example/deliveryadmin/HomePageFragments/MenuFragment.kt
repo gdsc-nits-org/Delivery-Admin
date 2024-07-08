@@ -10,7 +10,9 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.LinearLayout
+import android.widget.SearchView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -27,8 +29,11 @@ import com.google.ai.client.generativeai.type.content
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -50,78 +55,122 @@ class MenuFragment : Fragment() {
     private lateinit var database: DatabaseReference
     private lateinit var auth: FirebaseAuth
 
+    private lateinit var adapter: DishAdapter
+    private lateinit var dishes: MutableList<dishDataModel>
+
     private val PICK_IMAGE_REQUEST = 1
     private lateinit var generativeModel: GenerativeModel
+
+    private lateinit var fab: FloatingActionButton
+    private lateinit var aiButton: LinearLayout
+    private lateinit var searchView: SearchView
+    private lateinit var imageButton: View
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        val rootView = inflater.inflate(R.layout.fragment_menu, container, false)
+        return inflater.inflate(R.layout.fragment_menu, container, false)
+    }
 
-        userId = FirebaseAuth.getInstance().currentUser?.uid.orEmpty() // Get the current user's ID
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
-        recyclerView = rootView.findViewById(R.id.dishes_recycler_view)
+        val searchLayout = view.findViewById<LinearLayout>(R.id.search_layout)
+        val searchButton = view.findViewById<Button>(R.id.search_button)
+        searchView = view.findViewById(R.id.search_view)
+
+        userId = FirebaseAuth.getInstance().currentUser?.uid.orEmpty()
+
+        recyclerView = view.findViewById(R.id.dishes_recycler_view)
         recyclerView.layoutManager = LinearLayoutManager(activity)
 
-        shimmerFrameLayout = rootView.findViewById(R.id.shimmer_view_container)
+        shimmerFrameLayout = view.findViewById(R.id.shimmer_view_container)
 
-        emptyStateLayout = rootView.findViewById(R.id.empty_state_layout)
-        animationView = rootView.findViewById(R.id.animationView)
+        emptyStateLayout = view.findViewById(R.id.empty_state_layout)
+        animationView = view.findViewById(R.id.animationView)
 
-        val dishDataSource = dishDatasource()
-        shimmerFrameLayout.startShimmer()
-        dishDataSource.loadItems { data ->
-            if (isAdded) {
-                mydataset = data // Store data in the property
-                val adapter = DishAdapter(data, requireContext(), userId) // Pass userId to the adapter
-                recyclerView.adapter = adapter
-                shimmerFrameLayout.stopShimmer()
-                shimmerFrameLayout.visibility = View.GONE
+        searchView.visibility = View.GONE // Initially hide the SearchView
 
-                // Show/hide empty state based on dataset
-                if (data.isEmpty()) {
-                    emptyStateLayout.visibility = View.VISIBLE
-                    recyclerView.visibility = View.GONE
-                    animationView.playAnimation()
-                } else {
-                    emptyStateLayout.visibility = View.GONE
-                    recyclerView.visibility = View.VISIBLE
-                }
-            }
+        searchButton.setOnClickListener {
+            searchLayout.removeView(searchButton) // Remove the button
+            searchView.visibility = View.VISIBLE // Show the SearchView
+            searchView.isIconified = false // Expand the SearchView
         }
 
+        searchView.setOnCloseListener {
+            // When SearchView is closed (iconified), add back the button
+            searchView.visibility = View.GONE
+            searchLayout.addView(searchButton, 0)
+            false
+        }
 
-        val fab = rootView.findViewById<FloatingActionButton>(R.id.fab)
+        fab = view.findViewById(R.id.fab)
         fab.setOnClickListener {
             val intent = Intent(activity, AddItem::class.java)
             startActivity(intent)
         }
 
-        // Firebase Part
+        val dishDataSource = dishDatasource()
+        shimmerFrameLayout.startShimmer()
+        dishDataSource.loadItems { data ->
+            if (isAdded) {
+                mydataset = data
+                adapter = DishAdapter(data, requireContext(), userId)
+                recyclerView.adapter = adapter
+                shimmerFrameLayout.stopShimmer()
+                shimmerFrameLayout.visibility = View.GONE
+
+                updateEmptyState(data) // Update empty state based on initial dataset
+            }
+        }
+
         auth = FirebaseAuth.getInstance()
         database = FirebaseDatabase.getInstance().reference
 
-        // Gemini AI part
         generativeModel = GenerativeModel(
             modelName = "gemini-1.5-flash",
-            apiKey = "AIzaSyBbA55jn6SXCEwRQVLjWEMFLOAMF1ttlQQ" // Hard coding for now; will use BuildConfig later on
+            apiKey = "AIzaSyBbA55jn6SXCEwRQVLjWEMFLOAMF1ttlQQ"
         )
 
-        val aiButton = rootView.findViewById<LinearLayout>(R.id.ai)
-
+        aiButton = view.findViewById(R.id.ai)
         aiButton.setOnClickListener {
-//            Toast.makeText(activity, "AI clicked", Toast.LENGTH_SHORT).show()
-            // Image selector
             val intent = Intent(Intent.ACTION_PICK)
             intent.type = "image/*"
             startActivityForResult(intent, PICK_IMAGE_REQUEST)
         }
 
-        return rootView
+        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                return false
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                adapter.filter.filter(newText)
+                return false
+            }
+        })
+
+        imageButton = view.findViewById(R.id.image)
+        imageButton.setOnClickListener {
+            val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
+            startActivityForResult(intent, 100)
+        }
     }
 
+    private fun updateEmptyState(data: List<dishDataModel>) {
+        if (data.isEmpty()) {
+            emptyStateLayout.visibility = View.VISIBLE
+            recyclerView.visibility = View.GONE
+            animationView.playAnimation()
+        } else {
+            emptyStateLayout.visibility = View.GONE
+            recyclerView.visibility = View.VISIBLE
+        }
+    }
+
+
+    @Deprecated("Deprecated in Java")
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == PICK_IMAGE_REQUEST && resultCode == AppCompatActivity.RESULT_OK && data != null && data.data != null) {
@@ -165,9 +214,6 @@ class MenuFragment : Fragment() {
                         val price = priceLine.split(':')[1].trim()
                         val description = descriptionLine.split(':')[1].trim()
 
-//                        println(getName(name))
-//                        println(getNumber(price))
-//                        println(getName(description))
                         upLoadDishToFirebase(getName(name), getNumber(price).toInt(), getName(description))
                     }
                 }
@@ -190,7 +236,7 @@ class MenuFragment : Fragment() {
                 dishName = dishName,
                 price = price,
                 ingredients = ingredients,
-                imageUrl = ""
+                imageUrl = "https://firebasestorage.googleapis.com/v0/b/delivery-app-9324d.appspot.com/o/images%2F1720205422304.jpg?alt=media&token=14b67c89-0454-411f-99f0-c9a3f47e9f52"
             )
 
             dishRef.setValue(dish)
@@ -235,7 +281,7 @@ class MenuFragment : Fragment() {
         return jsonObjects
     }
 
-    fun getName(inputText: String): String {
+    private fun getName(inputText: String): String {
         val pattern = Pattern.compile("\"([^\"]+)\"")
         val matcher = pattern.matcher(inputText)
         return if (matcher.find()) {
@@ -245,7 +291,7 @@ class MenuFragment : Fragment() {
         }
     }
 
-    fun getNumber(inputText: String): String {
+    private fun getNumber(inputText: String): String {
         val pattern = Pattern.compile("\\b(\\d+)\\b")
         val matcher = pattern.matcher(inputText)
         return if (matcher.find()) {
