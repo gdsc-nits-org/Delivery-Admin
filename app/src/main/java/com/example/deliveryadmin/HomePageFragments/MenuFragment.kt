@@ -66,6 +66,11 @@ class MenuFragment : Fragment() {
     private lateinit var searchView: SearchView
     private lateinit var imageButton: View
 
+    private var currentFilterText: String? = null
+    private var savedScrollPosition: Int = 0
+
+    private lateinit var layoutManager: LinearLayoutManager
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -84,6 +89,7 @@ class MenuFragment : Fragment() {
 
         recyclerView = view.findViewById(R.id.dishes_recycler_view)
         recyclerView.layoutManager = LinearLayoutManager(activity)
+        layoutManager = recyclerView.layoutManager as LinearLayoutManager
 
         shimmerFrameLayout = view.findViewById(R.id.shimmer_view_container)
 
@@ -116,12 +122,14 @@ class MenuFragment : Fragment() {
         dishDataSource.loadItems { data ->
             if (isAdded) {
                 mydataset = data
-                adapter = DishAdapter(data, requireContext(), userId)
+                adapter = DishAdapter(requireContext(), userId, layoutManager)
                 recyclerView.adapter = adapter
+                adapter.updateData(data)
                 shimmerFrameLayout.stopShimmer()
                 shimmerFrameLayout.visibility = View.GONE
 
-                updateEmptyState(data) // Update empty state based on initial dataset
+                updateEmptyState(data)
+                applyCurrentFilter()
             }
         }
 
@@ -146,6 +154,7 @@ class MenuFragment : Fragment() {
             }
 
             override fun onQueryTextChange(newText: String?): Boolean {
+                currentFilterText = newText
                 adapter.filter.filter(newText)
                 return false
             }
@@ -169,6 +178,11 @@ class MenuFragment : Fragment() {
         }
     }
 
+    private fun applyCurrentFilter() {
+        currentFilterText?.let {
+            adapter.filter.filter(it)
+        }
+    }
 
     @Deprecated("Deprecated in Java")
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -214,7 +228,7 @@ class MenuFragment : Fragment() {
                         val price = priceLine.split(':')[1].trim()
                         val description = descriptionLine.split(':')[1].trim()
 
-                        upLoadDishToFirebase(getName(name), getNumber(price).toInt(), getName(description))
+                        uploadDishToFirebase(getName(name), getNumber(price).toInt(), getName(description))
                     }
                 }
             } catch (e: Exception) {
@@ -223,12 +237,11 @@ class MenuFragment : Fragment() {
         }
     }
 
-    private fun upLoadDishToFirebase(dishName: String, price: Int, ingredients: String) {
+    private fun uploadDishToFirebase(dishName: String, price: Int, ingredients: String) {
         val currentUser: FirebaseUser? = auth.currentUser
         if (currentUser != null) {
             val userId = currentUser.uid
             val dishRef = database.child("dishes").child(userId).push()
-
             val dishId = dishRef.key
 
             val dish = dishDataModel(
@@ -243,14 +256,13 @@ class MenuFragment : Fragment() {
                 .addOnSuccessListener {
                     Log.d("SaveItemToFirebase", "Dish saved successfully")
                     Toast.makeText(activity, "Dish saved successfully", Toast.LENGTH_SHORT).show()
+                    // After saving, restore the scroll position
+                    recyclerView.layoutManager?.scrollToPosition(savedScrollPosition)
                 }
                 .addOnFailureListener { e ->
-                    Log.e("SaveItemToFirebase", "Failed to save dish: ${e.message}", e)
+                    Log.e("SaveItemToFirebase", "Failed to save dish: ${e.message}")
                     Toast.makeText(activity, "Failed to save dish: ${e.message}", Toast.LENGTH_SHORT).show()
                 }
-        } else {
-            Log.e("SaveItemToFirebase", "No user is signed in")
-            Toast.makeText(activity, "No user is signed in", Toast.LENGTH_SHORT).show()
         }
     }
 
@@ -300,4 +312,7 @@ class MenuFragment : Fragment() {
             ""
         }
     }
+
+
+
 }

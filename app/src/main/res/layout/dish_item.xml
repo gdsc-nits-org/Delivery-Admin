@@ -112,11 +112,15 @@
         </RelativeLayout>
 
         <View
+            android:id="@+id/divider"
             android:layout_width="match_parent"
-            android:layout_height="2dp"
-            android:background="@drawable/dotted_divider"
+            android:layout_height="1dp"
+            android:background="@color/lightGrey"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="parent" />
+            app:layout_constraintTop_toBottomOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginTop="7dp"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
 

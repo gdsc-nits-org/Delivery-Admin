@@ -5,67 +5,34 @@ import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Filter
+import android.widget.Filterable
 import android.widget.ImageView
 import android.widget.Switch
 import android.widget.TextView
 import androidx.cardview.widget.CardView
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.deliveryadmin.R
 import com.example.deliveryadmin.menu.EditItem
 import com.example.deliveryadmin.models.dishDataModel
 import com.google.firebase.database.FirebaseDatabase
-import android.widget.Filter
-import android.widget.Filterable
 import java.util.*
-import kotlin.collections.ArrayList
 
 class DishAdapter(
-    private val dishList: List<dishDataModel>,
     private val context: Context,
-    private val userId: String // Include userId in the adapter constructor
+    private val userId: String,
+    private val layoutManager: LinearLayoutManager
 ) : RecyclerView.Adapter<DishAdapter.ItemViewHolder>(), Filterable {
 
-    private var reversedDishList: List<dishDataModel> = dishList.asReversed()
-    private var filteredDishList: List<dishDataModel> = reversedDishList
+    private var reversedDishList: List<dishDataModel> = emptyList()
+    private var filteredDishList: List<dishDataModel> = emptyList()
 
-    inner class ItemViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val dishItemName: TextView = itemView.findViewById(R.id.dishItemName)
-        val dishItemPrice: TextView = itemView.findViewById(R.id.dishItemPrice)
-        val dishItemIngredients: TextView = itemView.findViewById(R.id.dishItemIngredients)
-        val dishItemImage: ImageView = itemView.findViewById(R.id.dishItemImage)
-        val dishVegNonVegImage: ImageView = itemView.findViewById(R.id.vegNonVegSymbol)
-        val editButton: CardView = itemView.findViewById(R.id.editButton)
-        val dishItemAvailability: Switch = itemView.findViewById(R.id.dishItemAvailability)
-
-        init {
-            // Handle click on the edit button
-            editButton.setOnClickListener {
-                val position = adapterPosition
-                if (position != RecyclerView.NO_POSITION) {
-                    val dish = filteredDishList[position]
-                    // Open EditItem activity with dish details
-                    val intent = Intent(context, EditItem::class.java).apply {
-                        putExtra("dishId", dish.id)
-                        putExtra("dishName", dish.dishName)
-                        putExtra("price", dish.price)
-                        putExtra("ingredients", dish.ingredients)
-                        putExtra("veg", dish.veg)
-                    }
-                    context.startActivity(intent)
-                }
-            }
-
-            // Initialize switch listener
-            dishItemAvailability.setOnCheckedChangeListener(null) // Clear previous listener
-            dishItemAvailability.setOnCheckedChangeListener { _, isChecked ->
-                val position = adapterPosition
-                if (position != RecyclerView.NO_POSITION) {
-                    val dish = filteredDishList[position]
-                    updateItemStatus(dish, isChecked)
-                }
-            }
-        }
+    init {
+        // Initialize empty lists
+        reversedDishList = emptyList()
+        filteredDishList = reversedDishList
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemViewHolder {
@@ -95,34 +62,73 @@ class DishAdapter(
             }
 
             override fun publishResults(charSequence: CharSequence?, filterResults: FilterResults?) {
-                filteredDishList = filterResults?.values as List<dishDataModel>? ?: emptyList()
+                filteredDishList = filterResults?.values as? List<dishDataModel> ?: emptyList()
                 notifyDataSetChanged()
             }
         }
     }
 
-    private fun ItemViewHolder.bind(dish: dishDataModel) {
-        dishItemName.text = dish.dishName
-        dishItemPrice.text = dish.price.toString()
-        dishItemIngredients.text = dish.ingredients
-        dishItemAvailability.isChecked = dish.itemStatus
+    fun updateData(newDishList: List<dishDataModel>) {
+        reversedDishList = newDishList.asReversed()
+        filteredDishList = reversedDishList
+        notifyDataSetChanged()
+    }
 
-        // Load the image using Glide
-        Glide.with(context)
-            .load(dish.imageUrl)
-            .placeholder(R.drawable.dummy_food)
-            .error(R.drawable.media)
-            .into(dishItemImage)
+    inner class ItemViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        private val dishItemName: TextView = itemView.findViewById(R.id.dishItemName)
+        private val dishItemPrice: TextView = itemView.findViewById(R.id.dishItemPrice)
+        private val dishItemIngredients: TextView = itemView.findViewById(R.id.dishItemIngredients)
+        private val dishItemImage: ImageView = itemView.findViewById(R.id.dishItemImage)
+        private val dishVegNonVegImage: ImageView = itemView.findViewById(R.id.vegNonVegSymbol)
+        private val editButton: CardView = itemView.findViewById(R.id.editButton)
+        private val dishItemAvailability: Switch = itemView.findViewById(R.id.dishItemAvailability)
 
-        val vegNonVegResource = if (dish.veg) R.drawable.vegetarian_food_symbol else R.drawable.non_vegetarian_food_symbol
-        dishVegNonVegImage.setImageResource(vegNonVegResource)
+        init {
+            // Handle click on the edit button
+            editButton.setOnClickListener {
+                val position = bindingAdapterPosition
+                if (position != RecyclerView.NO_POSITION) {
+                    val dish = filteredDishList[position]
+                    // Open EditItem activity with dish details
+                    val intent = Intent(context, EditItem::class.java).apply {
+                        putExtra("dishId", dish.id)
+                        putExtra("dishName", dish.dishName)
+                        putExtra("price", dish.price)
+                        putExtra("ingredients", dish.ingredients)
+                        putExtra("veg", dish.veg)
+                    }
+                    context.startActivity(intent)
+                }
+            }
 
-        // Set tag to identify the current item in the listener
-        dishItemAvailability.tag = dish.id
+            // Initialize switch listener
+            dishItemAvailability.setOnCheckedChangeListener(null) // Clear previous listener
+            dishItemAvailability.setOnCheckedChangeListener { _, isChecked ->
+                val position = bindingAdapterPosition
+                if (position != RecyclerView.NO_POSITION) {
+                    val dish = filteredDishList[position]
+                    updateItemStatus(dish, isChecked)
+                }
+            }
+        }
 
-        // Set listener after binding data
-        dishItemAvailability.setOnCheckedChangeListener { _, isChecked ->
-            updateItemStatus(dish, isChecked)
+        fun bind(dish: dishDataModel) {
+            dishItemName.text = dish.dishName
+            dishItemPrice.text = dish.price.toString()
+            dishItemIngredients.text = dish.ingredients
+            dishItemAvailability.isChecked = dish.itemStatus
+
+            Glide.with(context)
+                .load(dish.imageUrl)
+                .placeholder(R.drawable.dummy_food)
+                .error(R.drawable.media)
+                .into(dishItemImage)
+
+            val vegNonVegResource = if (dish.veg) R.drawable.vegetarian_food_symbol else R.drawable.non_vegetarian_food_symbol
+            dishVegNonVegImage.setImageResource(vegNonVegResource)
+
+            // Set tag to identify the current item in the listener
+            dishItemAvailability.tag = dish.id
         }
     }
 
@@ -136,7 +142,18 @@ class DishAdapter(
             .addOnCompleteListener { task ->
                 if (task.isSuccessful) {
                     dish.itemStatus = isChecked // Update the local model's status
-                    notifyItemChanged(filteredDishList.indexOf(dish)) // Notify adapter of item change
+
+                    // Get the current visible position before notifying item change
+                    val currentScrollPosition = layoutManager.findFirstVisibleItemPosition()
+
+                    // Notify the adapter that the item at a specific position has changed
+                    val adapterPosition = filteredDishList.indexOf(dish)
+                    if (adapterPosition != -1) {
+                        notifyItemChanged(adapterPosition)
+                    }
+
+                    // Scroll back to the original position after the item has been updated
+                    layoutManager.scrollToPosition(currentScrollPosition)
                 } else {
                     // Handle the failure, maybe revert the switch state
                     // This depends on your app's logic and user experience
