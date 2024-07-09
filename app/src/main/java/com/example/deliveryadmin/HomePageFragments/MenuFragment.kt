@@ -56,7 +56,6 @@ class MenuFragment : Fragment() {
     private lateinit var auth: FirebaseAuth
 
     private lateinit var adapter: DishAdapter
-    private lateinit var dishes: MutableList<dishDataModel>
 
     private val PICK_IMAGE_REQUEST = 1
     private lateinit var generativeModel: GenerativeModel

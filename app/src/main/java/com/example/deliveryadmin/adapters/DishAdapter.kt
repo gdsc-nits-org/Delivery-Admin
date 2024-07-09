@@ -11,6 +11,7 @@ import android.widget.ImageView
 import android.widget.Switch
 import android.widget.TextView
 import androidx.cardview.widget.CardView
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
@@ -72,10 +73,15 @@ class DishAdapter(
     }
 
     fun updateData(newDishList: List<dishDataModel>) {
+        val diffCallback = DishDiffCallback(reversedDishList, newDishList.asReversed())
+        val diffResult = DiffUtil.calculateDiff(diffCallback)
+
         reversedDishList = newDishList.asReversed()
         filteredDishList = reversedDishList
-        notifyDataSetChanged()
+
+        diffResult.dispatchUpdatesTo(this)
     }
+
 
     inner class ItemViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val dishItemName: TextView = itemView.findViewById(R.id.dishItemName)
@@ -178,5 +184,23 @@ class DishAdapter(
         .getReference("dishes")
             .child(userId)
         database.addValueEventListener(itemStatusListener)
+    }
+
+    class DishDiffCallback(
+        private val oldList: List<dishDataModel>,
+        private val newList: List<dishDataModel>
+    ) : DiffUtil.Callback() {
+
+        override fun getOldListSize() = oldList.size
+
+        override fun getNewListSize() = newList.size
+
+        override fun areItemsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
+            return oldList[oldItemPosition].id == newList[newItemPosition].id
+        }
+
+        override fun areContentsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
+            return oldList[oldItemPosition] == newList[newItemPosition]
+        }
     }
 }
