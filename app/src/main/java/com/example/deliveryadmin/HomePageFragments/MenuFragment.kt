@@ -50,7 +50,7 @@ class MenuFragment : Fragment() {
     private lateinit var animationView: LottieAnimationView
 
     private lateinit var mydataset: List<dishDataModel>
-    private lateinit var userId: String // Add userId variable
+    private lateinit var userId: String
 
     private lateinit var database: DatabaseReference
     private lateinit var auth: FirebaseAuth
@@ -95,16 +95,15 @@ class MenuFragment : Fragment() {
         emptyStateLayout = view.findViewById(R.id.empty_state_layout)
         animationView = view.findViewById(R.id.animationView)
 
-        searchView.visibility = View.GONE // Initially hide the SearchView
+        searchView.visibility = View.GONE
 
         searchButton.setOnClickListener {
-            searchLayout.removeView(searchButton) // Remove the button
-            searchView.visibility = View.VISIBLE // Show the SearchView
-            searchView.isIconified = false // Expand the SearchView
+            searchLayout.removeView(searchButton)
+            searchView.visibility = View.VISIBLE
+            searchView.isIconified = false
         }
 
         searchView.setOnCloseListener {
-            // When SearchView is closed (iconified), add back the button
             searchView.visibility = View.GONE
             searchLayout.addView(searchButton, 0)
             false
