@@ -1,3 +1,56 @@
 <resources>
     <string name="app_name">Delivery Admin</string>
+    <string name="home">Home</string>
+    <string name="search">Search</string>
+    <string name="menu">Menu</string>
+    <string name="profile">Profile</string>
+    <string name="Options">Options</string>
+    <string name="add_items">Items Details</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="add_item_image">Add item\'s image</string>
+
+
+    <string name="current_orders">Current Orders</string>
+    <string name="_30_mins">30 Mins</string>
+    <string name="order_id">Order ID</string>
+    <string name="me20002977">ME20002977</string>
+    <string name="all_Details"><u><b>All Details</b></u></string>
+    <string name="delivery_status">Delivery Status:</string>
+    <string name="driver_incoming">Driver Incoming</string>
+    <string name="todo">TODO</string>
+    <string name="delivering">Delivering</string>
+    <string name="open">Open</string>
+    <string name="masimpur_silchar">Masimpur,Silchar</string>
+    <string name="burger_king">Burger King</string>
+    <string name="explore">Explore</string>
+
+    <string name="dish_title">Dish_Title</string>
+    <string name="todoimg">TODO</string>
+    <string name="dish_titleP">Dish_Title</string>
+    <string name="todop">TODO</string>
+
+    <string name="helload">Hello</string>
+    <string name="Your_Profilead">Your Profile</string>
+    <string name="Your_Ratingsad">Your Ratings</string>
+    <string name="Your_Ordersad">Your Orders</string>
+    <string name="Addressad">Address</string>
+    <string name="Payment_Historyad">Payment History</string>
+    <string name="Settingsad">Settings</string>
+    <string name="Log_Outad">Log Out</string>
+    <string name="Send_Feedbackad">Send Feedback</string>
+    <string name="About_usad">About us</string>
+    <string name="editad">Edit\n</string>
+    <string name="nameadmin">Name</string>
+    <string name="emailadmin">Email</string>
+    <string name="contact_noadmin">Contact No</string>
+    <string name="bioadmin">Bio</string>
+    <string name="saveadmin">Save</string>
+    <string name="no_items_available">No items available</string>
+    <string name="select_category">Select Category</string>
+    <string-array name="veg_non_veg_options">
+        <item>Veg</item>
+        <item>Non-Veg</item>
+    </string-array>
+
 </resources>

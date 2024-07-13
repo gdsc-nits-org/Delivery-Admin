@@ -1,0 +1,314 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:context=".HomePageFragments.HomeFragment">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/topPanel"
+        android:layout_width="match_parent"
+        android:layout_height="180dp"
+        android:background="@color/purple"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+        <!--        Will use Glide Library-->
+
+        <androidx.appcompat.widget.SearchView
+            android:id="@+id/searchView"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginHorizontal="16dp"
+            android:background="@drawable/roundedsearchbox"
+            android:gravity="center_vertical"
+            app:iconifiedByDefault="false"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.901"
+            app:queryBackground="@android:color/transparent"
+            app:queryHint="Search order" />
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/ivLogo"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginBottom="10dp"
+            android:clickable="true"
+            android:contentDescription="@string/todo"
+            android:focusable="true"
+            android:src="@drawable/dummy_food"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.044"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.226" />
+
+        <TextView
+            android:id="@+id/tvTitleShop"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="100dp"
+            android:layout_marginBottom="20dp"
+            android:ems="10"
+            android:fontFamily="serif"
+            android:gravity="start"
+            android:text="@string/burger_king"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.196" />
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="170dp"
+            android:layout_marginBottom="5dp"
+            android:background="@drawable/round_background"
+            android:backgroundTint="@color/purple2"
+            android:elevation="16dp"
+            android:padding="4dp"
+            android:text="@string/open"
+            android:textColor="#F6F2F2"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.509"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.537" />
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="30dp"
+            android:background="@drawable/round_background"
+            android:backgroundTint="@color/purple2"
+            android:elevation="16dp"
+            android:padding="4dp"
+            android:text="@string/delivering"
+            android:textColor="@color/white"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tvLocation"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="100dp"
+            android:ems="10"
+            android:text="@string/masimpur_silchar"
+            android:textColor="@color/lightGrey"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.325" />
+
+        <ImageButton
+            android:id="@+id/imageButtonNotif"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:layout_marginStart="320dp"
+            android:layout_marginBottom="105dp"
+            android:background="@drawable/round_background"
+            android:backgroundTint="@color/orange"
+            android:padding="8dp"
+            android:scaleType="centerCrop"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.652"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="1.0"
+            app:srcCompat="@drawable/outline_circle_notifications_24" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <!-- Scrollable Content -->
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/topPanel">
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="8dp">
+
+                <!-- Current Orders -->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="4dp"
+                    android:text="@string/current_orders"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+
+                <!-- Placeholder Image -->
+                <ImageView
+                    android:id="@+id/imgBackground"
+                    android:layout_width="match_parent"
+                    android:layout_height="205dp"
+                    android:background="@color/white"
+                    android:contentDescription="@string/todo"
+                    android:src="@drawable/emptypot"
+                    android:visibility="visible" />
+
+                <!-- RecyclerView for Orders -->
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rvOrders"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:background="@color/background"
+                    android:visibility="gone"
+                    tools:listitem="@layout/orders_item" />
+
+                <!-- Orders Today -->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="4dp"
+                    android:layout_marginVertical="16dp"
+                    android:text="Orders Today"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+
+                <!-- Cards for Pending and Delivered Orders -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <!-- Pending Orders Card -->
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="8dp"
+                        android:layout_weight="1"
+                        app:cardCornerRadius="8dp"
+                        app:cardElevation="16dp">
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <ImageView
+                                android:id="@+id/ivPending"
+                                android:layout_width="match_parent"
+                                android:layout_height="225dp"
+                                android:scaleType="fitXY"
+                                app:srcCompat="@drawable/pending" />
+
+                            <TextView
+                                android:id="@+id/tvTitlePending"
+                                android:layout_width="120dp"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentStart="true"
+                                android:layout_alignParentTop="true"
+                                android:layout_marginStart="24dp"
+                                android:layout_marginTop="15dp"
+                                android:background="@color/yellow"
+                                android:text="Pending"
+                                android:textColor="#DA5300"
+                                android:textSize="22sp"
+                                android:textStyle="normal" />
+
+                            <TextView
+                                android:id="@+id/tvDescPending"
+                                android:layout_width="50dp"
+                                android:layout_height="wrap_content"
+                                android:layout_below="@id/tvTitlePending"
+                                android:layout_alignParentStart="true"
+                                android:layout_marginStart="24dp"
+                                android:background="#FEE175"
+                                android:text="0"
+                                android:textColor="@color/textOrange"
+                                android:textSize="24dp"
+                                android:textStyle="bold" />
+
+                        </RelativeLayout>
+                    </androidx.cardview.widget.CardView>
+
+                    <!-- Delivered Orders Card -->
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="8dp"
+                        android:layout_weight="1"
+                        app:cardCornerRadius="8dp"
+                        app:cardElevation="8dp">
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <ImageView
+                                android:id="@+id/ivDelivered"
+                                android:layout_width="match_parent"
+                                android:layout_height="225dp"
+                                android:scaleType="fitXY"
+                                app:srcCompat="@drawable/delivery" />
+
+                            <TextView
+                                android:id="@+id/tvTitleDelivered"
+                                android:layout_width="120dp"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentStart="true"
+                                android:layout_alignParentTop="true"
+                                android:layout_marginStart="22dp"
+                                android:layout_marginTop="15dp"
+                                android:background="#229AD2"
+                                android:text="Completed"
+                                android:textColor="@color/white"
+                                android:textSize="22sp"
+                                android:textStyle="normal" />
+
+                            <TextView
+                                android:id="@+id/tvDescDelivered"
+                                android:layout_width="50dp"
+                                android:layout_height="wrap_content"
+                                android:layout_below="@id/tvTitleDelivered"
+                                android:layout_alignParentStart="true"
+                                android:layout_marginStart="20dp"
+                                android:background="#229AD3"
+                                android:paddingEnd="20dp"
+                                android:text="4"
+                                android:textColor="@color/white"
+                                android:textSize="24dp"
+                                android:textStyle="bold" />
+
+                        </RelativeLayout>
+                    </androidx.cardview.widget.CardView>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </ScrollView>
+    </FrameLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

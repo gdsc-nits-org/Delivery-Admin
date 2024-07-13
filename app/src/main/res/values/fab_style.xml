@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="FabShape">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">50%</item>
+    </style>
+    <style name="SearchViewStyle" parent="Widget.AppCompat.SearchView">
+        <!-- Customize other attributes as needed -->
+        <item name="android:queryBackground">@null</item>
+        <item name="android:submitBackground">@null</item>
+    </style>
+</resources>
