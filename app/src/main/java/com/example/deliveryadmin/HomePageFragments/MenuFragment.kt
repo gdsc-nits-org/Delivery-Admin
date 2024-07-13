@@ -29,6 +29,7 @@ import com.google.ai.client.generativeai.type.content
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
+import com.google.firebase.database.ChildEventListener
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
@@ -49,7 +50,7 @@ class MenuFragment : Fragment() {
     private lateinit var emptyStateLayout: LinearLayout
     private lateinit var animationView: LottieAnimationView
 
-    private lateinit var mydataset: List<dishDataModel>
+    private var mydataset: MutableList<dishDataModel> = mutableListOf()
     private lateinit var userId: String
 
     private lateinit var database: DatabaseReference
@@ -79,6 +80,8 @@ class MenuFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        fetchDishesFromFirebase() //For fetching dishes
 
         val searchLayout = view.findViewById<LinearLayout>(R.id.search_layout)
         val searchButton = view.findViewById<Button>(R.id.search_button)
@@ -121,7 +124,7 @@ class MenuFragment : Fragment() {
         shimmerFrameLayout.startShimmer()
         loadItems { data ->
             if (isAdded) {
-                mydataset = data
+                mydataset = data as MutableList<dishDataModel>
                 adapter = DishAdapter(requireContext(), userId, layoutManager)
                 recyclerView.adapter = adapter
                 adapter.updateData(data)
@@ -167,22 +170,6 @@ class MenuFragment : Fragment() {
         }
     }
 
-    private fun updateEmptyState(data: List<dishDataModel>) {
-        if (data.isEmpty()) {
-            emptyStateLayout.visibility = View.VISIBLE
-            recyclerView.visibility = View.GONE
-            animationView.playAnimation()
-        } else {
-            emptyStateLayout.visibility = View.GONE
-            recyclerView.visibility = View.VISIBLE
-        }
-    }
-
-    private fun applyCurrentFilter() {
-        currentFilterText?.let {
-            adapter.filter.filter(it)
-        }
-    }
 
     @Deprecated("Deprecated in Java")
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -266,6 +253,118 @@ class MenuFragment : Fragment() {
                 }
         }
     }
+
+    //For fetching dishes
+    private fun fetchDishesFromFirebase() {
+        val dishesRef = FirebaseDatabase.getInstance().getReference("dishes")
+
+        // Fetch initial list of dishes once
+        dishesRef.addListenerForSingleValueEvent(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                val dishesList = mutableListOf<dishDataModel>()
+                for (dishSnapshot in snapshot.children) {
+                    val dish = dishSnapshot.getValue(dishDataModel::class.java)
+                    dish?.let {
+                        dishesList.add(it)
+                    }
+                }
+
+                // Initialize adapter if not already initialized
+                if (!::adapter.isInitialized) {
+                    adapter = DishAdapter(requireContext(), userId, layoutManager)
+                    recyclerView.adapter = adapter
+                }
+
+                mydataset = dishesList
+                adapter.updateData(dishesList)
+                shimmerFrameLayout.stopShimmer()
+                shimmerFrameLayout.visibility = View.GONE
+
+                updateEmptyState(dishesList)
+                applyCurrentFilter()
+
+                // Add child event listener for incremental updates
+                addChildEventListener()
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                Log.e("FetchDishesFromFirebase", "Failed to fetch dishes: ${error.message}")
+                Toast.makeText(activity, "Failed to fetch dishes: ${error.message}", Toast.LENGTH_SHORT).show()
+            }
+        })
+    }
+
+    private fun addChildEventListener() {
+        val dishesRef = FirebaseDatabase.getInstance().getReference("dishes")
+
+        // Add child event listener to handle incremental updates
+        dishesRef.addChildEventListener(object : ChildEventListener {
+            override fun onChildAdded(snapshot: DataSnapshot, previousChildName: String?) {
+                val dish = snapshot.getValue(dishDataModel::class.java)
+                dish?.let {
+                    if (!mydataset.contains(it)) {
+                        mydataset.add(it)
+                        adapter.notifyItemInserted(mydataset.size - 1)
+                        updateEmptyState(mydataset)
+                        applyCurrentFilter()
+                    }
+                }
+            }
+
+            override fun onChildChanged(snapshot: DataSnapshot, previousChildName: String?) {
+                val dish = snapshot.getValue(dishDataModel::class.java)
+                dish?.let {
+                    val index = mydataset.indexOfFirst { item -> item.id == it.id }
+                    if (index != -1) {
+                        mydataset[index] = it
+                        adapter.notifyItemChanged(index)
+                        applyCurrentFilter()
+                    }
+                }
+            }
+
+            override fun onChildRemoved(snapshot: DataSnapshot) {
+                val dish = snapshot.getValue(dishDataModel::class.java)
+                dish?.let {
+                    val index = mydataset.indexOfFirst { item -> item.id == it.id }
+                    if (index != -1) {
+                        mydataset.removeAt(index)
+                        adapter.notifyItemRemoved(index)
+                        updateEmptyState(mydataset)
+                        applyCurrentFilter()
+                    }
+                }
+            }
+
+            override fun onChildMoved(snapshot: DataSnapshot, previousChildName: String?) {
+                // Handle moved dishes if necessary
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                Log.e("FetchDishesFromFirebase", "Child event listener cancelled: ${error.message}")
+            }
+        })
+    }
+
+    private fun updateEmptyState(data: List<dishDataModel>) {
+        if (data.isEmpty()) {
+            emptyStateLayout.visibility = View.VISIBLE
+            recyclerView.visibility = View.GONE
+            animationView.playAnimation()
+        } else {
+            emptyStateLayout.visibility = View.GONE
+            recyclerView.visibility = View.VISIBLE
+        }
+    }
+
+    private fun applyCurrentFilter() {
+        currentFilterText?.let {
+            adapter.filter.filter(it)
+        }
+    }
+
+
+
 
     private fun extractJsonFromString(input: String): List<String> {
         val jsonObjects = mutableListOf<String>()
