@@ -115,9 +115,11 @@ class MenuFragment : Fragment() {
             startActivity(intent)
         }
 
-        val dishDataSource = dishDatasource()
+        auth = FirebaseAuth.getInstance()
+        database = FirebaseDatabase.getInstance().reference
+//        val dishDataSource = dishDatasource()
         shimmerFrameLayout.startShimmer()
-        dishDataSource.loadItems { data ->
+        loadItems { data ->
             if (isAdded) {
                 mydataset = data
                 adapter = DishAdapter(requireContext(), userId, layoutManager)
@@ -239,7 +241,7 @@ class MenuFragment : Fragment() {
         val currentUser: FirebaseUser? = auth.currentUser
         if (currentUser != null) {
             val userId = currentUser.uid
-            val dishRef = database.child("dishes").child(userId).push()
+            val dishRef = database.child("dishes").push()
             val dishId = dishRef.key
 
             val dish = dishDataModel(
@@ -247,7 +249,8 @@ class MenuFragment : Fragment() {
                 dishName = dishName,
                 price = price,
                 ingredients = ingredients,
-                imageUrl = "https://firebasestorage.googleapis.com/v0/b/delivery-app-9324d.appspot.com/o/images%2F1720205422304.jpg?alt=media&token=14b67c89-0454-411f-99f0-c9a3f47e9f52"
+                imageUrl = "https://firebasestorage.googleapis.com/v0/b/delivery-app-9324d.appspot.com/o/images%2F1720205422304.jpg?alt=media&token=14b67c89-0454-411f-99f0-c9a3f47e9f52",
+                shopId = userId
             )
 
             dishRef.setValue(dish)
@@ -311,6 +314,29 @@ class MenuFragment : Fragment() {
         }
     }
 
+    private fun loadItems(callback: (List<dishDataModel>) -> Unit) {
+        database.child("dishes")
+            .orderByChild("shopId")
+            .equalTo(userId)
+            .addListenerForSingleValueEvent(object : ValueEventListener {
+                override fun onDataChange(dataSnapshot: DataSnapshot) {
+                    val dishes = mutableListOf<dishDataModel>()
+                    for (dishSnapshot in dataSnapshot.children) {
+                        val dish = dishSnapshot.getValue(dishDataModel::class.java)
+                        dish?.let { dishes.add(it) }
+                    }
+                    callback(dishes)
+                }
+
+                override fun onCancelled(databaseError: DatabaseError) {
+                    Log.e("MenuFragment", "Database error: ${databaseError.message}")
+                }
+            })
+    }
+
+    companion object {
+        private const val PICK_IMAGE_REQUEST = 1
+    }
 
 
 }

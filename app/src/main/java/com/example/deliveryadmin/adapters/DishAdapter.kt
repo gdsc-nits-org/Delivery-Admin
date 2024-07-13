@@ -141,10 +141,7 @@ class DishAdapter(
     }
 
     private fun updateItemStatus(dish: dishDataModel, isChecked: Boolean) {
-        val database = FirebaseDatabase.getInstance()
-            .getReference("dishes")
-            .child(userId)
-            .child(dish.id)
+        val database = FirebaseDatabase.getInstance().getReference("dishes").child(dish.id)
 
         database.child("itemStatus").setValue(isChecked)
             .addOnCompleteListener { task ->
@@ -170,7 +167,7 @@ class DishAdapter(
                     val dish = dishSnapshot.getValue(dishDataModel::class.java)
                     dish?.let { updatedDishList.add(it) }
                 }
-                updateData(updatedDishList) // Update the adapter with the newlist
+                updateData(updatedDishList)
             }
         }
 
