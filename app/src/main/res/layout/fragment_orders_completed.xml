@@ -23,6 +23,18 @@
             android:scaleType="fitXY"
             app:srcCompat="@drawable/completed_background" />
 
+
+        <ImageView
+            android:id="@+id/backArrow"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="1dp"
+            android:src="@drawable/orange_back_arrow"
+
+            app:layout_constraintTop_toTopOf="parent"
+            tools:layout_editor_absoluteX="16dp" />
+
         <TextView
             android:id="@+id/tvTitleDelivered"
             android:layout_width="wrap_content"
@@ -57,7 +69,8 @@
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="100dp"
+
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"

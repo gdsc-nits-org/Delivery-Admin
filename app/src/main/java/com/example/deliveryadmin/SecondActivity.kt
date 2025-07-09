@@ -11,6 +11,7 @@ import com.example.deliveryadmin.HomePageFragments.SearchFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
+import android.content.Intent
 
 
 class SecondActivity : AppCompatActivity() {
@@ -54,37 +55,41 @@ class SecondActivity : AppCompatActivity() {
     }
 
     private fun initializeApp(user: FirebaseUser) {
-        bottomNavigationView = findViewById(R.id.bottom_navigation)
-        bottomNavigationView.setOnItemSelectedListener { menuItem ->
-            when (menuItem.itemId) {
-                R.id.navigation_home -> {
-                    // Replace fragment with HomeFragment
-                    replaceFragment(HomeFragment())
-                    true
-                }
-                R.id.navigation_search -> {
-                    // Replace fragment with CartFragment
-                    replaceFragment(SearchFragment())
-                    true
-                }
-                R.id.navigation_menu -> {
-                    // Replace fragment with SearchFragment
-                    replaceFragment(MenuFragment())
-                    true
-                }
-                R.id.navigation_profile -> {
-                    // Replace fragment with ProfileFragment
-                    replaceFragment(ProfileFragment())
-                    true
-                }
-                else -> false
-            }
-        }
-        replaceFragment(HomeFragment())
+//        bottomNavigationView = findViewById(R.id.bottom_navigation)
+//        bottomNavigationView.setOnItemSelectedListener { menuItem ->
+//            when (menuItem.itemId) {
+//                R.id.navigation_home -> {
+//                    // Replace fragment with HomeFragment
+//                    replaceFragment(HomeFragment())
+//                    true
+//                }
+//                R.id.navigation_search -> {
+//                    // Replace fragment with CartFragment
+//                    replaceFragment(SearchFragment())
+//                    true
+//                }
+//                R.id.navigation_menu -> {
+//                    // Replace fragment with SearchFragment
+//                    replaceFragment(MenuFragment())
+//                    true
+//                }
+//                R.id.navigation_profile -> {
+//                    // Replace fragment with ProfileFragment
+//                    replaceFragment(ProfileFragment())
+//                    true
+//                }
+//                else -> false
+//            }
+//        }
+//        replaceFragment(HomeFragment())
+        val intent = Intent(this, MainActivity::class.java)
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
+        startActivity(intent)
+        finish()
     }
 
 
-    private fun replaceFragment(fragment: Fragment) {
-        supportFragmentManager.beginTransaction().replace(R.id.frame_container, fragment).commit()
-    }
+//    private fun replaceFragment(fragment: Fragment) {
+//        supportFragmentManager.beginTransaction().replace(R.id.frame_container, fragment).commit()
+//    }
 }

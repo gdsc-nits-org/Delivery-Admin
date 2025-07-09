@@ -42,7 +42,7 @@ class SplashScreen : Fragment() {
 
         Handler(Looper.myLooper()!!).postDelayed(Runnable{
             if (auth.currentUser!=null){
-                navController.navigate(R.id.action_splashScreen_to_emptyActivity)
+                navController.navigate(R.id.action_splashScreen_to_homeFragment)
             }else{
                 navController.navigate(R.id.action_splashScreen_to_accessLocation)
             }

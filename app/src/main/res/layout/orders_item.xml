@@ -3,22 +3,24 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:padding="16dp"
     android:outlineAmbientShadowColor="@color/black"
     android:layout_margin="8dp"
-    app:cardElevation="32dp"
+    app:cardElevation="8dp"
     android:elevation="20dp"
     app:cardCornerRadius="16dp">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="horizontal"
+
         android:baselineAligned="false">
 
         <LinearLayout
             android:layout_width="0dp"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="vertical"
             android:layout_marginTop="16dp"
             android:layout_marginBottom="16dp"
@@ -36,7 +38,8 @@
                 android:padding="3dp"
                 android:textColor="@color/white"
                 android:background="@drawable/rounded_textview_bg"
-                app:drawableLeftCompat="@drawable/time_img"/>
+                app:drawableLeftCompat="@drawable/time_img"
+                tools:text="30 mins left"/>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -44,6 +47,7 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="24dp"
                 android:text="@string/order_id"
+                tools:text="Order ID"
                 android:textColor="#8C8C8C"
                 android:textSize="16sp"
                 android:textStyle="bold" />
@@ -54,6 +58,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:text="@string/me20002977"
+                tools:text="ME20002977"
                 android:textSize="20sp"
                 android:textStyle="bold" />
 
@@ -61,7 +66,7 @@
 
         <LinearLayout
             android:layout_width="0dp"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="vertical"
             android:gravity="end"
             android:layout_marginTop="16dp"
@@ -73,6 +78,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/all_Details"
+                tools:text="All Details"
                 android:focusable="true"
                 android:clickable="true"
                 android:textColor="@color/orange"
@@ -86,6 +92,7 @@
                 android:layout_marginEnd="16dp"
                 android:drawablePadding="10dp"
                 android:text="@string/delivery_status"
+                tools:text="Delivery Status"
                 android:textColor="#8C8C8C"
                 android:textSize="16sp"
                 android:textStyle="bold"
@@ -97,6 +104,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="16dp"
                 android:text="@string/driver_incoming"
+                tools:text="Driver Incoming"
                 android:textColor="#1A766C"
                 android:textSize="20sp"
                 android:textStyle="bold" />

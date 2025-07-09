@@ -4,6 +4,7 @@ import android.Manifest
 import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,9 +12,14 @@ import androidx.appcompat.app.AlertDialog
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import com.example.deliveryadmin.R
+import com.example.deliveryadmin.databinding.FragmentHomeBinding
 
 class HomeFragment : Fragment() {
+
+    private var _binding: FragmentHomeBinding? = null
+    private val binding get() = _binding!!
 
     companion object {
         private const val REQUEST_CODE_POST_NOTIFICATIONS = 1
@@ -23,15 +29,38 @@ class HomeFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+
+        _binding = FragmentHomeBinding.inflate(inflater, container, false)
         // Inflate the layout for this fragment
-        val rootView = inflater.inflate(R.layout.fragment_home, container, false)
+//        val rootView = inflater.inflate(R.layout.fragment_home, container, false)
 
         // Check for notification permissions
-        checkNotificationPermission()
+//        checkNotificationPermission()
 
-        return rootView
+        return binding.root
     }
+     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+         super.onViewCreated(view, savedInstanceState)
+         checkNotificationPermission()
+         binding.ivPending.setOnClickListener {
+             Log.d("HomeFragment", "Pending Orders Card Clicked")
+             try{
+                 findNavController().navigate(R.id.action_homeFragment_to_ordersPendingFragment)
+                 }catch (e: Exception){
+                 e.printStackTrace()
+             }
+         }
+         binding.ivDelivered.setOnClickListener {
+             Log.d("HomeFragment", "Delivered Orders Card Clicked")
+             try {
+                 findNavController().navigate(R.id.action_homeFragment_to_ordersCompletedFragment)
+             } catch (e: Exception) {
+                 e.printStackTrace()
+             }
+         }
 
+
+     }
     private fun checkNotificationPermission() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
             context?.let {

@@ -14,8 +14,8 @@
             android:id="@+id/action_splashScreen_to_accessLocation"
             app:destination="@id/accessLocation" />
         <action
-            android:id="@+id/action_splashScreen_to_emptyActivity"
-            app:destination="@id/emptyActivity" />
+            android:id="@+id/action_splashScreen_to_homeFragment"
+            app:destination="@id/homeFragment" />
     </fragment>
     <fragment
         android:id="@+id/accessLocation"
@@ -111,8 +111,8 @@
         android:label="fragment_address"
         tools:layout="@layout/fragment_address" >
         <action
-            android:id="@+id/action_addressFragment_to_emptyActivity"
-            app:destination="@id/emptyActivity" />
+            android:id="@+id/action_addressFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
         <action
             android:id="@+id/action_addressFragment_to_signIn"
             app:destination="@id/signIn" />
@@ -129,4 +129,55 @@
             android:id="@+id/action_forgotPasswordFragment_to_loginPage"
             app:destination="@id/loginPage" />
     </fragment>
+    <fragment
+        android:id ="@+id/homeFragment"
+        android:name="com.example.deliveryadmin.HomePageFragments.HomeFragment"
+        android:label="fragment_home"
+        tools:layout="@layout/fragment_home" >
+        <action
+         android:id="@+id/action_homeFragment_to_ordersPendingFragment"
+         app:destination="@id/ordersPendingFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_ordersCompletedFragment"
+            app:destination="@id/ordersCompletedFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/ordersPendingFragment"
+        android:name="com.example.deliveryadmin.HomePageFragments.OrdersPendingFragment"
+        android:label="fragment_orders_pending"
+        tools:layout="@layout/fragment_orders_pending" >
+    </fragment>
+    <fragment
+        android:id="@+id/ordersCompletedFragment"
+        android:name="com.example.deliveryadmin.HomePageFragments.OrdersCompletedFragment"
+        android:label="fragment_orders_completed"
+        tools:layout="@layout/fragment_orders_completed" >
+    </fragment>
+    <fragment
+        android:id="@+id/searchFragment"
+        android:name="com.example.deliveryadmin.HomePageFragments.SearchFragment"
+        android:label="Search"
+        tools:layout="@layout/fragment_search" />
+
+    <fragment
+        android:id="@+id/menuFragment"
+        android:name="com.example.deliveryadmin.HomePageFragments.MenuFragment"
+        android:label="Menu"
+        tools:layout="@layout/fragment_menu" />
+
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.example.deliveryadmin.HomePageFragments.ProfileFragment"
+        android:label="Profile"
+        tools:layout="@layout/fragment_profile" />
+
+
+
+
+
+
+
+
+
+
 </navigation>
